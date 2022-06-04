@@ -7,7 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class Test {
+public class mainUI {
     public static void main(String[] args) {
         String url = "jdbc:mysql://localhost:3306/project";
 
@@ -29,7 +29,7 @@ public class Test {
 
         } catch (SQLException ex) {
 
-            Logger lgr = Logger.getLogger(Test.class.getName());
+            Logger lgr = Logger.getLogger(mainUI.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
     }
