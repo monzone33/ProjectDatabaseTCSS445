@@ -3,6 +3,7 @@ import java.sql.*;
 
 public class ChampionUI extends JFrame {
     private JPanel ADPanel;
+    private JLabel ADLabel;
     private JLabel ADText;
     private JLabel ArmorLabel;
     private JPanel ArmorPanel;
@@ -66,45 +67,196 @@ public class ChampionUI extends JFrame {
 
     }
 
+    private void setUpStatsLabel(String stats) throws SQLException {
+        if(stats.equals("HP")) {
+            HpPanel = new JPanel();
+            HpLabel = new JLabel();
+            HpText = new JLabel();
+            HpLabel.setText("Health:");
 
+            String query = "SELECT "+ stats + " FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
+            Statement st = connection.createStatement();
+            ResultSet result = st.executeQuery(query);
 
-    private void setUpHp() throws SQLException {
-        HpPanel = new JPanel();
-        HpLabel = new JLabel();
-        HpText = new JLabel();
-
-        HpLabel.setText("Health:");
-
-        String query = "SELECT HP FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
-        Statement st = connection.createStatement();
-        ResultSet result = st.executeQuery(query);
-
-        while (result.next()) {
-            HpText.setText(String.valueOf(result.getInt(1)));
+            while (result.next()) {
+                HpText.setText(String.valueOf(result.getInt(1)));
+            }
+            HpPanel.add(HpLabel);
+            HpPanel.add(HpText);
+            StatsPanel.add(HpPanel);
         }
-        HpPanel.add(HpLabel);
-        HpPanel.add(HpText);
-        StatsPanel.add(HpPanel);
+        if(stats.equals("HPREGEN")) {
+            HpRegenPanel = new JPanel();
+            HpRegenLabel = new JLabel();
+            HpRegenText = new JLabel();
+
+            HpRegenLabel.setText("HpRegen:");
+
+            String query = "SELECT "+ stats + " FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
+            Statement st = connection.createStatement();
+            ResultSet result = st.executeQuery(query);
+
+            while (result.next()) {
+                HpRegenText.setText(String.valueOf(result.getDouble(1)));
+            }
+            HpRegenPanel.add(HpRegenLabel);
+            HpRegenPanel.add(HpRegenText);
+            StatsPanel.add(HpRegenPanel);
+        }
+        if(stats.equals("MANA")) {
+            ResourcePanel = new JPanel();
+            ResourceLabel = new JLabel();
+            ResourcePanelText = new JLabel();
+
+            ResourceLabel.setText("Resource:");
+
+            String query = "SELECT "+ stats + " FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
+            Statement st = connection.createStatement();
+            ResultSet result = st.executeQuery(query);
+
+            while (result.next()) {
+                ResourcePanelText.setText(String.valueOf(result.getDouble(1)));
+            }
+            ResourcePanel.add(ResourceLabel);
+            ResourcePanel.add(ResourcePanelText);
+            StatsPanel.add(ResourcePanel);
+        }
+        if(stats.equals("MANAREGEN")) {
+            ResourceRegenPanel = new JPanel();
+            ResourceRegenLabel = new JLabel();
+            ResourceRegenText = new JLabel();
+
+            ResourceLabel.setText("Resource Regen:");
+
+            String query = "SELECT "+ stats + " FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
+            Statement st = connection.createStatement();
+            ResultSet result = st.executeQuery(query);
+
+            while (result.next()) {
+                ResourceRegenText.setText(String.valueOf(result.getDouble(1)));
+            }
+            ResourceRegenPanel.add(ResourceRegenLabel);
+            ResourceRegenPanel.add(ResourceRegenText);
+            StatsPanel.add(ResourceRegenPanel);
+        }
+        if(stats.equals("AD")) {
+            ADPanel = new JPanel();
+            ADLabel = new JLabel();
+            ADText = new JLabel();
+
+            ADLabel.setText("AD:");
+
+            String query = "SELECT "+ stats + " FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
+            Statement st = connection.createStatement();
+            ResultSet result = st.executeQuery(query);
+
+            while (result.next()) {
+                ADText.setText(String.valueOf(result.getInt(1)));
+            }
+            ADPanel.add(ADLabel);
+            ADPanel.add(ADText);
+            StatsPanel.add(ADPanel);
+        }
+        if(stats.equals("ASN")) {
+            AttackSpeedPanel = new JPanel();
+            AttackSpeedLabel = new JLabel();
+            AttackSpeedText = new JLabel();
+
+            AttackSpeedLabel.setText("Attack Speed:");
+
+            String query = "SELECT "+ stats + " FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
+            Statement st = connection.createStatement();
+            ResultSet result = st.executeQuery(query);
+
+            while (result.next()) {
+                AttackSpeedText.setText(String.valueOf(result.getDouble(1)));
+            }
+            AttackSpeedPanel.add(AttackSpeedLabel);
+            AttackSpeedPanel.add(AttackSpeedText);
+            StatsPanel.add(AttackSpeedPanel);
+        }
+        if(stats.equals("ARMOR")) {
+            ArmorPanel = new JPanel();
+            ArmorLabel = new JLabel();
+            ArmorText = new JLabel();
+
+            ArmorLabel.setText("Armor:");
+
+            String query = "SELECT "+ stats + " FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
+            Statement st = connection.createStatement();
+            ResultSet result = st.executeQuery(query);
+
+            while (result.next()) {
+                ArmorText.setText(String.valueOf(result.getInt(1)));
+            }
+            ArmorPanel.add(AttackSpeedLabel);
+            ArmorPanel.add(ArmorText);
+            StatsPanel.add(ArmorPanel);
+        }
+        if(stats.equals("MR")) {
+            MRPanel = new JPanel();
+            MRLabel = new JLabel();
+            MRText = new JLabel();
+
+            MRLabel.setText("Magic Resist:");
+
+            String query = "SELECT "+ stats + " FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
+            Statement st = connection.createStatement();
+            ResultSet result = st.executeQuery(query);
+
+            while (result.next()) {
+                MRText.setText(String.valueOf(result.getDouble(1)));
+            }
+            MRPanel.add(MRLabel);
+            MRPanel.add(MRText);
+            StatsPanel.add(MRPanel);
+        }
+        if(stats.equals("MS")) {
+            MSPanel = new JPanel();
+            MSLabel = new JLabel();
+            MSText = new JLabel();
+
+            MSLabel.setText("Movement Speed:");
+
+            String query = "SELECT "+ stats + " FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
+            Statement st = connection.createStatement();
+            ResultSet result = st.executeQuery(query);
+
+            while (result.next()) {
+                MSText.setText(String.valueOf(result.getDouble(1)));
+            }
+            MSPanel.add(MSLabel);
+            MSPanel.add(MSText);
+            StatsPanel.add(MSPanel);
+        }
+        if(stats.equals("RANGEN")) {
+            RangePanel = new JPanel();
+            RangeLabel = new JLabel();
+            RangeText = new JLabel();
+
+            RangeLabel.setText("Range:");
+
+            String query = "SELECT "+ stats + " FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
+            Statement st = connection.createStatement();
+            ResultSet result = st.executeQuery(query);
+
+            while (result.next()) {
+                RangeText.setText(String.valueOf(result.getInt(1)));
+            }
+            RangePanel.add(RangeLabel);
+            RangePanel.add(RangeText);
+            StatsPanel.add(RangePanel);
+        }
     }
 
-    private void setUpHpRegen() throws SQLException {
-        HpRegenPanel = new JPanel();
-        HpRegenLabel = new JLabel();
-        HpRegenText = new JLabel();
-
-        HpRegenLabel.setText("HpRegen:");
-
-        String query = "SELECT HPREGEN FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
-        Statement st = connection.createStatement();
-        ResultSet result = st.executeQuery(query);
-
-        while (result.next()) {
-            HpRegenText.setText(String.valueOf(result.getDouble(1)));
+    private void setUpAllStats() throws SQLException {
+        String[] stats = {"HP", "HPREGEN", "MANA", "MANAREGEN", "AD", "ASN","ARMOR","MR","MS","RANGEN"};
+        for (int i = 0; i < 10; i++) {
+            setUpStatsLabel(stats[i]);
         }
-        HpRegenPanel.add(HpRegenLabel);
-        HpRegenPanel.add(HpRegenText);
-        StatsPanel.add(HpRegenPanel);
     }
+
+
 
     private void initComponents() throws SQLException {
 
@@ -113,30 +265,6 @@ public class ChampionUI extends JFrame {
         StatsPanel = new JPanel();
 
 
-        ResourcePanel = new JPanel();
-        ResourceLabel = new JLabel();
-        ResourcePanelText = new JLabel();
-        ResourceRegenPanel = new JPanel();
-        ResourceRegenLabel = new JLabel();
-        ResourceRegenText = new JLabel();
-        ADPanel = new JPanel();
-        JLabel ADLabel = new JLabel();
-        ADText = new JLabel();
-        AttackSpeedPanel = new JPanel();
-        AttackSpeedLabel = new JLabel();
-        AttackSpeedText = new JLabel();
-        ArmorPanel = new JPanel();
-        ArmorLabel = new JLabel();
-        ArmorText = new JLabel();
-        MRPanel = new JPanel();
-        MRLabel = new JLabel();
-        MRText = new JLabel();
-        MSPanel = new JPanel();
-        MSLabel = new JLabel();
-        MSText = new JLabel();
-        RangePanel = new JPanel();
-        RangeLabel = new JLabel();
-        RangeText = new JLabel();
         BottomPanel = new JPanel();
 
         //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -152,225 +280,8 @@ public class ChampionUI extends JFrame {
         StatsPanel.setBackground(new java.awt.Color(102, 102, 255));
         StatsPanel.setLayout(new java.awt.GridLayout(5, 2, 5, 5));
 
-        setUpHp();
-        setUpHpRegen();
+        setUpAllStats();
 
-
-        ResourceLabel.setText("Resource:");
-
-        ResourcePanelText.setText("300");
-
-        GroupLayout ResourcePanelLayout = new GroupLayout(ResourcePanel);
-        ResourcePanel.setLayout(ResourcePanelLayout);
-        ResourcePanelLayout.setHorizontalGroup(
-                ResourcePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(ResourcePanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(ResourceLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(ResourcePanelText)
-                                .addContainerGap(109, Short.MAX_VALUE))
-        );
-        ResourcePanelLayout.setVerticalGroup(
-                ResourcePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(ResourcePanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(ResourcePanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(ResourceLabel)
-                                        .addComponent(ResourcePanelText))
-                                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
-        StatsPanel.add(ResourcePanel);
-
-        ResourceRegenLabel.setText("ResourceRegen:");
-
-        ResourceRegenText.setText("300");
-
-        GroupLayout ResourceRegenPanelLayout = new GroupLayout(ResourceRegenPanel);
-        ResourceRegenPanel.setLayout(ResourceRegenPanelLayout);
-        ResourceRegenPanelLayout.setHorizontalGroup(
-                ResourceRegenPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(ResourceRegenPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(ResourceRegenLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(ResourceRegenText)
-                                .addContainerGap(76, Short.MAX_VALUE))
-        );
-        ResourceRegenPanelLayout.setVerticalGroup(
-                ResourceRegenPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(ResourceRegenPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(ResourceRegenPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(ResourceRegenLabel)
-                                        .addComponent(ResourceRegenText))
-                                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
-        StatsPanel.add(ResourceRegenPanel);
-
-        ADLabel.setText("AD:");
-
-        ADText.setText("300");
-
-        GroupLayout ADPanelLayout = new GroupLayout(ADPanel);
-        ADPanel.setLayout(ADPanelLayout);
-        ADPanelLayout.setHorizontalGroup(
-                ADPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(ADPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(ADLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(ADText)
-                                .addContainerGap(141, Short.MAX_VALUE))
-        );
-        ADPanelLayout.setVerticalGroup(
-                ADPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(ADPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(ADPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(ADLabel)
-                                        .addComponent(ADText))
-                                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
-        StatsPanel.add(ADPanel);
-
-        AttackSpeedLabel.setText("AttackSpeed:");
-
-        AttackSpeedText.setText("300");
-
-        GroupLayout AttackSpeedPanelLayout = new GroupLayout(AttackSpeedPanel);
-        AttackSpeedPanel.setLayout(AttackSpeedPanelLayout);
-        AttackSpeedPanelLayout.setHorizontalGroup(
-                AttackSpeedPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(AttackSpeedPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(AttackSpeedLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(AttackSpeedText)
-                                .addContainerGap(91, Short.MAX_VALUE))
-        );
-        AttackSpeedPanelLayout.setVerticalGroup(
-                AttackSpeedPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(AttackSpeedPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(AttackSpeedPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(AttackSpeedLabel)
-                                        .addComponent(AttackSpeedText))
-                                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
-        StatsPanel.add(AttackSpeedPanel);
-
-        ArmorLabel.setText("Armor:");
-
-        ArmorText.setText("300");
-
-        GroupLayout ArmorPanelLayout = new GroupLayout(ArmorPanel);
-        ArmorPanel.setLayout(ArmorPanelLayout);
-        ArmorPanelLayout.setHorizontalGroup(
-                ArmorPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(ArmorPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(ArmorLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(ArmorText)
-                                .addContainerGap(123, Short.MAX_VALUE))
-        );
-        ArmorPanelLayout.setVerticalGroup(
-                ArmorPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(ArmorPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(ArmorPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(ArmorLabel)
-                                        .addComponent(ArmorText))
-                                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
-        StatsPanel.add(ArmorPanel);
-
-        MRLabel.setText("MR:");
-
-        MRText.setText("300");
-
-        GroupLayout MRPanelLayout = new GroupLayout(MRPanel);
-        MRPanel.setLayout(MRPanelLayout);
-        MRPanelLayout.setHorizontalGroup(
-                MRPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(MRPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(MRLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(MRText)
-                                .addContainerGap(139, Short.MAX_VALUE))
-        );
-        MRPanelLayout.setVerticalGroup(
-                MRPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(MRPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(MRPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(MRLabel)
-                                        .addComponent(MRText))
-                                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
-        StatsPanel.add(MRPanel);
-
-        MSLabel.setText("MS:");
-
-        MSText.setText("300");
-
-        GroupLayout MSPanelLayout = new GroupLayout(MSPanel);
-        MSPanel.setLayout(MSPanelLayout);
-        MSPanelLayout.setHorizontalGroup(
-                MSPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(MSPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(MSLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(MSText)
-                                .addContainerGap(140, Short.MAX_VALUE))
-        );
-        MSPanelLayout.setVerticalGroup(
-                MSPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(MSPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(MSPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(MSLabel)
-                                        .addComponent(MSText))
-                                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
-        StatsPanel.add(MSPanel);
-
-        RangeLabel.setText("Range:");
-
-        RangeText.setText("300");
-
-        GroupLayout RangePanelLayout = new GroupLayout(RangePanel);
-        RangePanel.setLayout(RangePanelLayout);
-        RangePanelLayout.setHorizontalGroup(
-                RangePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(RangePanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(RangeLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(RangeText)
-                                .addContainerGap(124, Short.MAX_VALUE))
-        );
-        RangePanelLayout.setVerticalGroup(
-                RangePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(RangePanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(RangePanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(RangeLabel)
-                                        .addComponent(RangeText))
-                                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
-        StatsPanel.add(RangePanel);
 
         MiddlePanel.add(StatsPanel, java.awt.BorderLayout.CENTER);
 
