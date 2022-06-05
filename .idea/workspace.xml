@@ -18,11 +18,9 @@
       <change afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/com/intellij/uiDesigner/core/Util.class" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/com/intellij/uiDesigner/core/VerticalInfo.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project/Test.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/Tester$1.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/Tester.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/Tester.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/mainUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/mainUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tester.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tester.java" afterDir="false" />
     </list>
@@ -196,6 +194,7 @@
     <MESSAGE value="Added Jar File" />
     <MESSAGE value="Change file name." />
     <MESSAGE value="inital new branch Commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="inital new branch Commit" />
+    <MESSAGE value="Second table and searching" />
+    <option name="LAST_COMMIT_MESSAGE" value="Second table and searching" />
   </component>
 </project>

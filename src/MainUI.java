@@ -14,10 +14,11 @@ public class MainUI extends JFrame{
     private JButton SearchButton;
     private JPanel SearchPanel;
     private JLabel SepciesText;
-    private JPanel SortByPanel;
-    private JLabel SortByText;
+    private JPanel SearchByPanel;
+    private JLabel SearchByText;
     private JComboBox<String> SpeciesComboBox;
     private JPanel SpeciesSortPanel;
+    private JScrollPane tablePanel2;
     public Connection connection;
 
     public MainUI() throws SQLException {
@@ -27,8 +28,8 @@ public class MainUI extends JFrame{
     public void createGUI() throws SQLException {
         connection = getConnection();
         SearchPanel = new JPanel();
-        SortByPanel = new JPanel();
-        SortByText = new JLabel();
+        SearchByPanel = new JPanel();
+        SearchByText = new JLabel();
         RegionSortPanel = new JPanel();
         RegionText = new JLabel();
         RegionComboBox = new JComboBox<>();
@@ -45,6 +46,8 @@ public class MainUI extends JFrame{
         JScrollPane tablePanel = new JScrollPane();
         tablePanel.getViewport().add(addInitialTable());
 
+        tablePanel2 = new JScrollPane();
+
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 153, 102));
         setPreferredSize(new java.awt.Dimension(1200, 600));
@@ -53,20 +56,21 @@ public class MainUI extends JFrame{
 
         SearchPanel.setBackground(new java.awt.Color(102, 102, 0));
 
-        SortByPanel.setPreferredSize(new java.awt.Dimension(80, 40));
+        SearchByPanel.setPreferredSize(new java.awt.Dimension(80, 40));
 
-        SortByText.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        SortByText.setText("SORT BY");
-        SortByPanel.add(SortByText);
+        SearchByText.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        SearchByText.setText("Search by");
+        SearchByPanel.add(SearchByText);
 
-        SearchPanel.add(SortByPanel);
+        SearchPanel.add(SearchByPanel);
         RegionSortPanel.setPreferredSize(new java.awt.Dimension(180, 40));
 
         RegionText.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         RegionText.setText("Region:");
         RegionSortPanel.add(RegionText);
 
-        RegionComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "All", "Bandle City", "Bilgewater", "Blessed Isles", "Demacia", "Freljord", "Ionia", "Ixtal", "Noxus", "Piltover", "Runeterra", "Shadow Isles", "Shurima", "Targon", "Void", "Zaun" }));
+        RegionComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "All", "Bandle City", "Bilgewater", "Blessed Isles", "Demacia", "Freljord", "Ionia", "Ixtal",
+                "Noxus", "Piltover", "Runeterra", "Shadow Isles", "Shurima", "Targon", "Void", "Zaun" }));
         RegionSortPanel.add(RegionComboBox);
 
         SearchPanel.add(RegionSortPanel);
@@ -77,7 +81,7 @@ public class MainUI extends JFrame{
         SepciesText.setText("Species:");
         SpeciesSortPanel.add(SepciesText);
 
-        SpeciesComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "Ascended", "Celestial", "Demon", "Other", "Sapient", "Spirit", "Undead" }));
+        SpeciesComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "All","Ascended", "Celestial", "Demon", "Other", "Sapient", "Spirit", "Undead" }));
         SpeciesSortPanel.add(SpeciesComboBox);
 
         SearchPanel.add(SpeciesSortPanel);
@@ -88,12 +92,25 @@ public class MainUI extends JFrame{
         RaceText.setText("Race:");
         RaceSortPanel.add(RaceText);
 
-        RaceComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "Aspect Host", "Baccai", "Brackern", "Cat", "Celestial", "Darkin", "God-Warrior", "Golem", "Human", "Minotaur", "Plague Rat", "Revenant", "Spirit", "Spirit God", "Terrestrial Dragon", "Unknown", "Vastayan", "Voidborn", "Wraith", "Yordle", " " }));
+        RaceComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "All","Aspect Host", "Baccai", "Brackern", "Cat", "Celestial", "Darkin",
+                "God-Warrior", "Golem", "Human", "Minotaur", "Plague Rat", "Revenant", "Spirit", "Spirit God", "Terrestrial Dragon", "Unknown",
+                "Vastayan", "Voidborn", "Wraith", "Yordle" }));
         RaceSortPanel.add(RaceComboBox);
 
         SearchPanel.add(RaceSortPanel);
 
         SearchButton.setText("Search");
+
+        SearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    SearchButtonActionPerformed(evt);
+                } catch(SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        });
+
         SearchPanel.add(SearchButton);
 
         getContentPane().add(SearchPanel);
@@ -110,8 +127,8 @@ public class MainUI extends JFrame{
                 MiddlePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGap(0, 161, Short.MAX_VALUE)
         );
-        getContentPane().add(MiddlePanel);
-
+        //getContentPane().add(MiddlePanel);
+        getContentPane().add(tablePanel2);
         BottomPanel.setBackground(new java.awt.Color(204, 51, 0));
 
         GroupLayout BottomPanelLayout = new GroupLayout(BottomPanel);
@@ -128,6 +145,46 @@ public class MainUI extends JFrame{
         //getContentPane().add(BottomPanel);
         getContentPane().add(tablePanel);
         pack();
+    }
+
+    private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {
+        System.out.println(RegionComboBox.getSelectedItem());
+        System.out.println(SpeciesComboBox.getSelectedItem());
+        System.out.println(RaceComboBox.getSelectedItem());
+        System.out.println("Update table");
+        tablePanel2.getViewport().removeAll();
+        tablePanel2.getViewport().add(addLoreTable());
+    }
+
+    private JTable addLoreTable() throws SQLException {
+        String columns[] = {"Name","REGION", "SPECIES", "RACE"};
+        String[][] championRows = new String[159][4];
+
+
+        String query = "SELECT * FROM lore";
+
+        if (!RegionComboBox.getSelectedItem().equals("All")) {
+            query += " WHERE REGION = " + "'"+ RegionComboBox.getSelectedItem()+ "'" + " AND";
+        }
+        if (!SpeciesComboBox.getSelectedItem().equals("All")){
+            query += " SPECIES = " + "'"+ SpeciesComboBox.getSelectedItem()+ "'" + " AND";
+        }
+        if (!RaceComboBox.getSelectedItem().equals("All")){
+            query += " RACE = " + "'" + RaceComboBox.getSelectedItem()+ "'";
+        }
+
+        System.out.println(query);
+        Statement st = connection.createStatement();
+        ResultSet result = st.executeQuery(query);
+        int row = 0;
+        while (result.next()) {
+            championRows[row][0] = result.getString(1);
+            championRows[row][1] = "" + result.getString(2);
+            championRows[row][2] = "" + result.getString(3);
+            championRows[row][3] = "" + result.getString(4);
+            row++;
+        }
+        return new JTable(championRows, columns);
     }
 
     private JTable addInitialTable() throws SQLException {
