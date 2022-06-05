@@ -1,73 +1,70 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.*;
 
 public class ChampionUI extends JFrame {
-    private javax.swing.JPanel BottomPanel;
-    private javax.swing.JLabel HpLabel;
-    private javax.swing.JPanel HpPanel;
-    private javax.swing.JLabel HpText;
-    private javax.swing.JPanel MiddlePanel;
-    private javax.swing.JLabel NameLabel;
-    private javax.swing.JLabel NameText;
-    private javax.swing.JPanel StatsPanel;
-    private javax.swing.JPanel TopPanel;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
+    private JPanel ADPanel;
+    private JLabel ADText;
+    private JLabel ArmorLabel;
+    private JPanel ArmorPanel;
+    private JLabel ArmorText;
+    private JLabel AttackSpeedLabel;
+    private JPanel AttackSpeedPanel;
+    private JLabel AttackSpeedText;
+    private JPanel BottomPanel;
+    private JLabel HpLabel;
+    private JPanel HpPanel;
+    private JLabel HpRegenLabel;
+    private JPanel HpRegenPanel;
+    private JLabel HpRegenText;
+    private JLabel HpText;
+    private JLabel HpText7;
+    private JLabel MRLabel;
+    private JPanel MRPanel;
+    private JLabel MRText;
+    private JLabel MSLabel;
+    private JPanel MSPanel;
+    private JLabel MSText;
+    private JPanel MiddlePanel;
+    private JLabel NameLabel;
+    private JLabel NameText;
+    private JLabel RangeLabel;
+    private JPanel RangePanel;
+    private JLabel ResourceLabel;
+    private JPanel ResourcePanel;
+    private JLabel ResourcePanelText;
+    private JLabel ResourceRegenLabel;
+    private JPanel ResourceRegenPanel;
+    private JLabel ResourceRegenText;
+    private JPanel StatsPanel;
+    private JPanel TopPanel;
+    private String championName;
+    private Connection connection;
 
-    public ChampionUI(){
+    public ChampionUI(String championName, Connection connection) throws SQLException {
+        this.championName = championName;
+        this.connection = connection;
         initComponents();
     }
 
-    private void initComponents() {
-
-        TopPanel = new javax.swing.JPanel();
-        NameLabel = new javax.swing.JLabel();
-        NameText = new javax.swing.JLabel();
-        MiddlePanel = new javax.swing.JPanel();
-        StatsPanel = new javax.swing.JPanel();
-        HpPanel = new javax.swing.JPanel();
-        HpLabel = new javax.swing.JLabel();
-        HpText = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
-        jPanel12 = new javax.swing.JPanel();
-        jPanel13 = new javax.swing.JPanel();
-        jPanel14 = new javax.swing.JPanel();
-        jPanel15 = new javax.swing.JPanel();
-        jPanel16 = new javax.swing.JPanel();
-        jPanel18 = new javax.swing.JPanel();
-        BottomPanel = new javax.swing.JPanel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(153, 153, 255));
-        setPreferredSize(new java.awt.Dimension(450, 650));
-        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.Y_AXIS));
+    private void setUpName() throws SQLException {
+        NameLabel = new JLabel();
+        NameText = new JLabel();
 
         NameLabel.setText("Name:");
+        String query = "SELECT NAME FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
+        Statement st = connection.createStatement();
+        ResultSet result = st.executeQuery(query);
 
-        NameText.setText("aatrox");
+        while (result.next()) {
+            NameText.setText(result.getString(1));
+        }
 
-        javax.swing.GroupLayout TopPanelLayout = new javax.swing.GroupLayout(TopPanel);
+        GroupLayout TopPanelLayout = new GroupLayout(TopPanel);
         TopPanel.setLayout(TopPanelLayout);
         TopPanelLayout.setHorizontalGroup(
-                TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                TopPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(TopPanelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(NameLabel)
@@ -76,14 +73,61 @@ public class ChampionUI extends JFrame {
                                 .addContainerGap(318, Short.MAX_VALUE))
         );
         TopPanelLayout.setVerticalGroup(
-                TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TopPanelLayout.createSequentialGroup()
+                TopPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(GroupLayout.Alignment.TRAILING, TopPanelLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(TopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(TopPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(NameLabel)
                                         .addComponent(NameText))
                                 .addContainerGap(166, Short.MAX_VALUE))
         );
+
+    }
+
+    private void initComponents() throws SQLException {
+
+        TopPanel = new JPanel();
+
+        MiddlePanel = new JPanel();
+        StatsPanel = new JPanel();
+        HpPanel = new JPanel();
+        HpLabel = new JLabel();
+        HpText = new JLabel();
+        HpRegenPanel = new JPanel();
+        HpRegenLabel = new JLabel();
+        HpRegenText = new JLabel();
+        ResourcePanel = new JPanel();
+        ResourceLabel = new JLabel();
+        ResourcePanelText = new JLabel();
+        ResourceRegenPanel = new JPanel();
+        ResourceRegenLabel = new JLabel();
+        ResourceRegenText = new JLabel();
+        ADPanel = new JPanel();
+        JLabel ADLabel = new JLabel();
+        ADText = new JLabel();
+        AttackSpeedPanel = new JPanel();
+        AttackSpeedLabel = new JLabel();
+        AttackSpeedText = new JLabel();
+        ArmorPanel = new JPanel();
+        ArmorLabel = new JLabel();
+        ArmorText = new JLabel();
+        MRPanel = new JPanel();
+        MRLabel = new JLabel();
+        MRText = new JLabel();
+        MSPanel = new JPanel();
+        MSLabel = new JLabel();
+        MSText = new JLabel();
+        RangePanel = new JPanel();
+        RangeLabel = new JLabel();
+        HpText7 = new JLabel();
+        BottomPanel = new JPanel();
+
+        //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(153, 153, 255));
+        setPreferredSize(new java.awt.Dimension(450, 650));
+        getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+
+        setUpName();
 
         getContentPane().add(TopPanel);
 
@@ -97,22 +141,22 @@ public class ChampionUI extends JFrame {
 
         HpText.setText("300");
 
-        javax.swing.GroupLayout HpPanelLayout = new javax.swing.GroupLayout(HpPanel);
+        GroupLayout HpPanelLayout = new GroupLayout(HpPanel);
         HpPanel.setLayout(HpPanelLayout);
         HpPanelLayout.setHorizontalGroup(
-                HpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                HpPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(HpPanelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(HpLabel)
                                 .addGap(18, 18, 18)
                                 .addComponent(HpText)
-                                .addContainerGap(53, Short.MAX_VALUE))
+                                .addContainerGap(122, Short.MAX_VALUE))
         );
         HpPanelLayout.setVerticalGroup(
-                HpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                HpPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(HpPanelLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(HpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(HpPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(HpLabel)
                                         .addComponent(HpText))
                                 .addContainerGap(16, Short.MAX_VALUE))
@@ -120,200 +164,261 @@ public class ChampionUI extends JFrame {
 
         StatsPanel.add(HpPanel);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-                jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 133, Short.MAX_VALUE)
+        HpRegenLabel.setText("HpRegen:");
+
+        HpRegenText.setText("300");
+
+        GroupLayout HpRegenPanelLayout = new GroupLayout(HpRegenPanel);
+        HpRegenPanel.setLayout(HpRegenPanelLayout);
+        HpRegenPanelLayout.setHorizontalGroup(
+                HpRegenPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(HpRegenPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(HpRegenLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(HpRegenText)
+                                .addContainerGap(108, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-                jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 38, Short.MAX_VALUE)
+        HpRegenPanelLayout.setVerticalGroup(
+                HpRegenPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(HpRegenPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(HpRegenPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(HpRegenLabel)
+                                        .addComponent(HpRegenText))
+                                .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        StatsPanel.add(jPanel4);
+        StatsPanel.add(HpRegenPanel);
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 133, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 38, Short.MAX_VALUE)
-        );
+        ResourceLabel.setText("Resource:");
 
-        StatsPanel.add(jPanel5);
+        ResourcePanelText.setText("300");
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-                jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 133, Short.MAX_VALUE)
+        GroupLayout ResourcePanelLayout = new GroupLayout(ResourcePanel);
+        ResourcePanel.setLayout(ResourcePanelLayout);
+        ResourcePanelLayout.setHorizontalGroup(
+                ResourcePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(ResourcePanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(ResourceLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(ResourcePanelText)
+                                .addContainerGap(109, Short.MAX_VALUE))
         );
-        jPanel6Layout.setVerticalGroup(
-                jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 38, Short.MAX_VALUE)
-        );
-
-        StatsPanel.add(jPanel6);
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-                jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 133, Short.MAX_VALUE)
-        );
-        jPanel7Layout.setVerticalGroup(
-                jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 38, Short.MAX_VALUE)
+        ResourcePanelLayout.setVerticalGroup(
+                ResourcePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(ResourcePanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(ResourcePanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(ResourceLabel)
+                                        .addComponent(ResourcePanelText))
+                                .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        StatsPanel.add(jPanel7);
+        StatsPanel.add(ResourcePanel);
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-                jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 133, Short.MAX_VALUE)
-        );
-        jPanel8Layout.setVerticalGroup(
-                jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 38, Short.MAX_VALUE)
-        );
+        ResourceRegenLabel.setText("ResourceRegen:");
 
-        StatsPanel.add(jPanel8);
+        ResourceRegenText.setText("300");
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-                jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 133, Short.MAX_VALUE)
+        GroupLayout ResourceRegenPanelLayout = new GroupLayout(ResourceRegenPanel);
+        ResourceRegenPanel.setLayout(ResourceRegenPanelLayout);
+        ResourceRegenPanelLayout.setHorizontalGroup(
+                ResourceRegenPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(ResourceRegenPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(ResourceRegenLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(ResourceRegenText)
+                                .addContainerGap(76, Short.MAX_VALUE))
         );
-        jPanel9Layout.setVerticalGroup(
-                jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 38, Short.MAX_VALUE)
-        );
-
-        StatsPanel.add(jPanel9);
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-                jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 133, Short.MAX_VALUE)
-        );
-        jPanel10Layout.setVerticalGroup(
-                jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 38, Short.MAX_VALUE)
+        ResourceRegenPanelLayout.setVerticalGroup(
+                ResourceRegenPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(ResourceRegenPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(ResourceRegenPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(ResourceRegenLabel)
+                                        .addComponent(ResourceRegenText))
+                                .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        StatsPanel.add(jPanel10);
+        StatsPanel.add(ResourceRegenPanel);
 
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-                jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 133, Short.MAX_VALUE)
-        );
-        jPanel11Layout.setVerticalGroup(
-                jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 38, Short.MAX_VALUE)
-        );
+        ADLabel.setText("AD:");
 
-        StatsPanel.add(jPanel11);
+        ADText.setText("300");
 
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-                jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 133, Short.MAX_VALUE)
+        GroupLayout ADPanelLayout = new GroupLayout(ADPanel);
+        ADPanel.setLayout(ADPanelLayout);
+        ADPanelLayout.setHorizontalGroup(
+                ADPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(ADPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(ADLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(ADText)
+                                .addContainerGap(141, Short.MAX_VALUE))
         );
-        jPanel12Layout.setVerticalGroup(
-                jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 38, Short.MAX_VALUE)
-        );
-
-        StatsPanel.add(jPanel12);
-
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-                jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 133, Short.MAX_VALUE)
-        );
-        jPanel13Layout.setVerticalGroup(
-                jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 38, Short.MAX_VALUE)
+        ADPanelLayout.setVerticalGroup(
+                ADPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(ADPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(ADPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(ADLabel)
+                                        .addComponent(ADText))
+                                .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        StatsPanel.add(jPanel13);
+        StatsPanel.add(ADPanel);
 
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-                jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 133, Short.MAX_VALUE)
-        );
-        jPanel14Layout.setVerticalGroup(
-                jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 38, Short.MAX_VALUE)
-        );
+        AttackSpeedLabel.setText("AttackSpeed:");
 
-        StatsPanel.add(jPanel14);
+        AttackSpeedText.setText("300");
 
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-                jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 133, Short.MAX_VALUE)
+        GroupLayout AttackSpeedPanelLayout = new GroupLayout(AttackSpeedPanel);
+        AttackSpeedPanel.setLayout(AttackSpeedPanelLayout);
+        AttackSpeedPanelLayout.setHorizontalGroup(
+                AttackSpeedPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(AttackSpeedPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(AttackSpeedLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(AttackSpeedText)
+                                .addContainerGap(91, Short.MAX_VALUE))
         );
-        jPanel15Layout.setVerticalGroup(
-                jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 38, Short.MAX_VALUE)
-        );
-
-        StatsPanel.add(jPanel15);
-
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
-        jPanel16.setLayout(jPanel16Layout);
-        jPanel16Layout.setHorizontalGroup(
-                jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 133, Short.MAX_VALUE)
-        );
-        jPanel16Layout.setVerticalGroup(
-                jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 38, Short.MAX_VALUE)
+        AttackSpeedPanelLayout.setVerticalGroup(
+                AttackSpeedPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(AttackSpeedPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(AttackSpeedPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(AttackSpeedLabel)
+                                        .addComponent(AttackSpeedText))
+                                .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        StatsPanel.add(jPanel16);
+        StatsPanel.add(AttackSpeedPanel);
 
-        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
-        jPanel18.setLayout(jPanel18Layout);
-        jPanel18Layout.setHorizontalGroup(
-                jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 133, Short.MAX_VALUE)
+        ArmorLabel.setText("Armor:");
+
+        ArmorText.setText("300");
+
+        GroupLayout ArmorPanelLayout = new GroupLayout(ArmorPanel);
+        ArmorPanel.setLayout(ArmorPanelLayout);
+        ArmorPanelLayout.setHorizontalGroup(
+                ArmorPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(ArmorPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(ArmorLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(ArmorText)
+                                .addContainerGap(123, Short.MAX_VALUE))
         );
-        jPanel18Layout.setVerticalGroup(
-                jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 38, Short.MAX_VALUE)
+        ArmorPanelLayout.setVerticalGroup(
+                ArmorPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(ArmorPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(ArmorPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(ArmorLabel)
+                                        .addComponent(ArmorText))
+                                .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        StatsPanel.add(jPanel18);
+        StatsPanel.add(ArmorPanel);
+
+        MRLabel.setText("MR:");
+
+        MRText.setText("300");
+
+        GroupLayout MRPanelLayout = new GroupLayout(MRPanel);
+        MRPanel.setLayout(MRPanelLayout);
+        MRPanelLayout.setHorizontalGroup(
+                MRPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(MRPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(MRLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(MRText)
+                                .addContainerGap(139, Short.MAX_VALUE))
+        );
+        MRPanelLayout.setVerticalGroup(
+                MRPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(MRPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(MRPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(MRLabel)
+                                        .addComponent(MRText))
+                                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        StatsPanel.add(MRPanel);
+
+        MSLabel.setText("MS:");
+
+        MSText.setText("300");
+
+        GroupLayout MSPanelLayout = new GroupLayout(MSPanel);
+        MSPanel.setLayout(MSPanelLayout);
+        MSPanelLayout.setHorizontalGroup(
+                MSPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(MSPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(MSLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(MSText)
+                                .addContainerGap(140, Short.MAX_VALUE))
+        );
+        MSPanelLayout.setVerticalGroup(
+                MSPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(MSPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(MSPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(MSLabel)
+                                        .addComponent(MSText))
+                                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        StatsPanel.add(MSPanel);
+
+        RangeLabel.setText("Range:");
+
+        HpText7.setText("300");
+
+        GroupLayout RangePanelLayout = new GroupLayout(RangePanel);
+        RangePanel.setLayout(RangePanelLayout);
+        RangePanelLayout.setHorizontalGroup(
+                RangePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(RangePanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(RangeLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(HpText7)
+                                .addContainerGap(124, Short.MAX_VALUE))
+        );
+        RangePanelLayout.setVerticalGroup(
+                RangePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(RangePanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(RangePanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(RangeLabel)
+                                        .addComponent(HpText7))
+                                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        StatsPanel.add(RangePanel);
 
         MiddlePanel.add(StatsPanel, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(MiddlePanel);
 
-        javax.swing.GroupLayout BottomPanelLayout = new javax.swing.GroupLayout(BottomPanel);
+        GroupLayout BottomPanelLayout = new GroupLayout(BottomPanel);
         BottomPanel.setLayout(BottomPanelLayout);
         BottomPanelLayout.setHorizontalGroup(
-                BottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                BottomPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGap(0, 410, Short.MAX_VALUE)
         );
         BottomPanelLayout.setVerticalGroup(
-                BottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                BottomPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGap(0, 188, Short.MAX_VALUE)
         );
 

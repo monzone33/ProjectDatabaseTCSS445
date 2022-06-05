@@ -163,9 +163,9 @@ public class MainUI extends JFrame{
         pack();
     }
 
-    private void ChampionButtonPressed(String ChampName){
+    private void ChampionButtonPressed(String ChampName, Connection connection) throws SQLException {
         System.out.println(ChampName);
-        new ChampionUI().setVisible(true);
+        new ChampionUI(ChampName, connection).setVisible(true);
     }
 
     private void championSearch() throws SQLException {
@@ -201,7 +201,11 @@ public class MainUI extends JFrame{
 
             button.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
-                    ChampionButtonPressed(button.getText());
+                    try {
+                        ChampionButtonPressed(button.getText(), connection);
+                    } catch(SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
                 }
             });
         }
