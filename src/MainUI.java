@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.*;
 
 
@@ -102,8 +103,8 @@ public class MainUI extends JFrame{
 
         SearchButton.setText("Search");
 
-        SearchButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        SearchButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 try {
                     SearchButtonActionPerformed(evt);
                 } catch(SQLException throwables) {
@@ -162,6 +163,11 @@ public class MainUI extends JFrame{
         pack();
     }
 
+    private void ChampionButtonPressed(String ChampName){
+        System.out.println(ChampName);
+        new ChampionUI().setVisible(true);
+    }
+
     private void championSearch() throws SQLException {
 
         String query = "SELECT NAME FROM lore";
@@ -175,8 +181,6 @@ public class MainUI extends JFrame{
             } else {
                 query += " AND SPECIES = " + "'"+ SpeciesComboBox.getSelectedItem()+ "'";
             }
-
-
         }
         if (!RaceComboBox.getSelectedItem().equals("All")){
             if (query.endsWith("lore")) {
@@ -194,6 +198,12 @@ public class MainUI extends JFrame{
             JButton button = new JButton();
             button.setText(result.getString(1));
             SearchResultPanel.add(button);
+
+            button.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    ChampionButtonPressed(button.getText());
+                }
+            });
         }
 
     }
