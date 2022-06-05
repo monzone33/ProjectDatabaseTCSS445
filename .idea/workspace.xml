@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95547c82-0ccb-4119-8a40-9968ff5b1207" name="Changes" comment="New ChampionUI, pops up when chamption button is pressed">
+    <list default="true" id="95547c82-0ccb-4119-8a40-9968ff5b1207" name="Changes" comment="ChampionUI now updates depending on which&#10;champtionButton was pressed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/ChampionUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/ChampionUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/mainUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/mainUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChampionUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChampionUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MainUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +107,7 @@
       <updated>1654322508527</updated>
       <workItem from="1654410181351" duration="5399000" />
       <workItem from="1654460210950" duration="4841000" />
-      <workItem from="1654467411344" duration="2208000" />
+      <workItem from="1654467411344" duration="3070000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1654322878364</created>
@@ -193,7 +193,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654469809031</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="ChampionUI now updates depending on which&#10;champtionButton was pressed">
+      <created>1654470777819</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1654470777819</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -221,6 +228,7 @@
     <MESSAGE value="Search now return champions in terms of button,&#10;query logic is fix,&#10;Middle panel is now changed to searchpanel with a scroll pane" />
     <MESSAGE value="Method and function clean up" />
     <MESSAGE value="New ChampionUI, pops up when chamption button is pressed" />
-    <option name="LAST_COMMIT_MESSAGE" value="New ChampionUI, pops up when chamption button is pressed" />
+    <MESSAGE value="ChampionUI now updates depending on which&#10;champtionButton was pressed" />
+    <option name="LAST_COMMIT_MESSAGE" value="ChampionUI now updates depending on which&#10;champtionButton was pressed" />
   </component>
 </project>

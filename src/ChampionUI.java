@@ -1,6 +1,4 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class ChampionUI extends JFrame {
@@ -19,7 +17,7 @@ public class ChampionUI extends JFrame {
     private JPanel HpRegenPanel;
     private JLabel HpRegenText;
     private JLabel HpText;
-    private JLabel HpText7;
+    private JLabel RangeText;
     private JLabel MRLabel;
     private JPanel MRPanel;
     private JLabel MRText;
@@ -61,41 +59,60 @@ public class ChampionUI extends JFrame {
             NameText.setText(result.getString(1));
         }
 
-        GroupLayout TopPanelLayout = new GroupLayout(TopPanel);
-        TopPanel.setLayout(TopPanelLayout);
-        TopPanelLayout.setHorizontalGroup(
-                TopPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(TopPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(NameLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(NameText)
-                                .addContainerGap(318, Short.MAX_VALUE))
-        );
-        TopPanelLayout.setVerticalGroup(
-                TopPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(GroupLayout.Alignment.TRAILING, TopPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(TopPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(NameLabel)
-                                        .addComponent(NameText))
-                                .addContainerGap(166, Short.MAX_VALUE))
-        );
+        TopPanel.setLayout(new javax.swing.BoxLayout(TopPanel, javax.swing.BoxLayout.Y_AXIS));
+        TopPanel.add(NameLabel);
+        TopPanel.add(NameText);
+        getContentPane().add(TopPanel);
 
+    }
+
+
+
+    private void setUpHp() throws SQLException {
+        HpPanel = new JPanel();
+        HpLabel = new JLabel();
+        HpText = new JLabel();
+
+        HpLabel.setText("Health:");
+
+        String query = "SELECT HP FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
+        Statement st = connection.createStatement();
+        ResultSet result = st.executeQuery(query);
+
+        while (result.next()) {
+            HpText.setText(String.valueOf(result.getInt(1)));
+        }
+        HpPanel.add(HpLabel);
+        HpPanel.add(HpText);
+        StatsPanel.add(HpPanel);
+    }
+
+    private void setUpHpRegen() throws SQLException {
+        HpRegenPanel = new JPanel();
+        HpRegenLabel = new JLabel();
+        HpRegenText = new JLabel();
+
+        HpRegenLabel.setText("HpRegen:");
+
+        String query = "SELECT HPREGEN FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
+        Statement st = connection.createStatement();
+        ResultSet result = st.executeQuery(query);
+
+        while (result.next()) {
+            HpRegenText.setText(String.valueOf(result.getDouble(1)));
+        }
+        HpRegenPanel.add(HpRegenLabel);
+        HpRegenPanel.add(HpRegenText);
+        StatsPanel.add(HpRegenPanel);
     }
 
     private void initComponents() throws SQLException {
 
         TopPanel = new JPanel();
-
         MiddlePanel = new JPanel();
         StatsPanel = new JPanel();
-        HpPanel = new JPanel();
-        HpLabel = new JLabel();
-        HpText = new JLabel();
-        HpRegenPanel = new JPanel();
-        HpRegenLabel = new JLabel();
-        HpRegenText = new JLabel();
+
+
         ResourcePanel = new JPanel();
         ResourceLabel = new JLabel();
         ResourcePanelText = new JLabel();
@@ -119,7 +136,7 @@ public class ChampionUI extends JFrame {
         MSText = new JLabel();
         RangePanel = new JPanel();
         RangeLabel = new JLabel();
-        HpText7 = new JLabel();
+        RangeText = new JLabel();
         BottomPanel = new JPanel();
 
         //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -129,67 +146,15 @@ public class ChampionUI extends JFrame {
 
         setUpName();
 
-        getContentPane().add(TopPanel);
-
         MiddlePanel.setBackground(new java.awt.Color(204, 204, 255));
         MiddlePanel.setLayout(new java.awt.BorderLayout());
 
         StatsPanel.setBackground(new java.awt.Color(102, 102, 255));
         StatsPanel.setLayout(new java.awt.GridLayout(5, 2, 5, 5));
 
-        HpLabel.setText("Health:");
+        setUpHp();
+        setUpHpRegen();
 
-        HpText.setText("300");
-
-        GroupLayout HpPanelLayout = new GroupLayout(HpPanel);
-        HpPanel.setLayout(HpPanelLayout);
-        HpPanelLayout.setHorizontalGroup(
-                HpPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(HpPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(HpLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(HpText)
-                                .addContainerGap(122, Short.MAX_VALUE))
-        );
-        HpPanelLayout.setVerticalGroup(
-                HpPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(HpPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(HpPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(HpLabel)
-                                        .addComponent(HpText))
-                                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
-        StatsPanel.add(HpPanel);
-
-        HpRegenLabel.setText("HpRegen:");
-
-        HpRegenText.setText("300");
-
-        GroupLayout HpRegenPanelLayout = new GroupLayout(HpRegenPanel);
-        HpRegenPanel.setLayout(HpRegenPanelLayout);
-        HpRegenPanelLayout.setHorizontalGroup(
-                HpRegenPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(HpRegenPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(HpRegenLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(HpRegenText)
-                                .addContainerGap(108, Short.MAX_VALUE))
-        );
-        HpRegenPanelLayout.setVerticalGroup(
-                HpRegenPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(HpRegenPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(HpRegenPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(HpRegenLabel)
-                                        .addComponent(HpRegenText))
-                                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
-        StatsPanel.add(HpRegenPanel);
 
         ResourceLabel.setText("Resource:");
 
@@ -382,7 +347,7 @@ public class ChampionUI extends JFrame {
 
         RangeLabel.setText("Range:");
 
-        HpText7.setText("300");
+        RangeText.setText("300");
 
         GroupLayout RangePanelLayout = new GroupLayout(RangePanel);
         RangePanel.setLayout(RangePanelLayout);
@@ -392,7 +357,7 @@ public class ChampionUI extends JFrame {
                                 .addContainerGap()
                                 .addComponent(RangeLabel)
                                 .addGap(18, 18, 18)
-                                .addComponent(HpText7)
+                                .addComponent(RangeText)
                                 .addContainerGap(124, Short.MAX_VALUE))
         );
         RangePanelLayout.setVerticalGroup(
@@ -401,7 +366,7 @@ public class ChampionUI extends JFrame {
                                 .addContainerGap()
                                 .addGroup(RangePanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                         .addComponent(RangeLabel)
-                                        .addComponent(HpText7))
+                                        .addComponent(RangeText))
                                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
