@@ -38,8 +38,8 @@ public class ChampionUI extends JFrame {
     private JLabel ResourceRegenText;
     private JPanel StatsPanel;
     private JPanel TopPanel;
-    private String championName;
-    private Connection connection;
+    private final String championName;
+    private final Connection connection;
 
     public ChampionUI(String championName, Connection connection) throws SQLException {
         this.championName = championName;

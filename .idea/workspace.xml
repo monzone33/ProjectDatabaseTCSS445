@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95547c82-0ccb-4119-8a40-9968ff5b1207" name="Changes" comment="ChampionUI now updates name, hp, and hp regen">
+    <list default="true" id="95547c82-0ccb-4119-8a40-9968ff5b1207" name="Changes" comment="ChampionUI now updates everything&#10;also clean up a lot of code and formating of UI">
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/ChampionUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/ChampionUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChampionUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChampionUI.java" afterDir="false" />
@@ -106,7 +107,7 @@
       <updated>1654322508527</updated>
       <workItem from="1654410181351" duration="5399000" />
       <workItem from="1654460210950" duration="4841000" />
-      <workItem from="1654467411344" duration="4707000" />
+      <workItem from="1654467411344" duration="4902000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1654322878364</created>
@@ -206,7 +207,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654471851693</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="ChampionUI now updates everything&#10;also clean up a lot of code and formating of UI">
+      <created>1654473189043</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1654473189043</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -236,6 +244,8 @@
     <MESSAGE value="New ChampionUI, pops up when chamption button is pressed" />
     <MESSAGE value="ChampionUI now updates depending on which&#10;champtionButton was pressed" />
     <MESSAGE value="ChampionUI now updates name, hp, and hp regen" />
-    <option name="LAST_COMMIT_MESSAGE" value="ChampionUI now updates name, hp, and hp regen" />
+    <MESSAGE value="ChampionUI now updates everything" />
+    <MESSAGE value="ChampionUI now updates everything&#10;also clean up a lot of code and formating of UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="ChampionUI now updates everything&#10;also clean up a lot of code and formating of UI" />
   </component>
 </project>
