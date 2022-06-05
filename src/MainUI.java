@@ -1,10 +1,12 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.sql.*;
 
 
 public class MainUI extends JFrame{
     private JPanel BottomPanel;
-    private JPanel MiddlePanel;
+    private JPanel SearchResultPanel;
+    private JScrollPane SearchResultScrollPane;
     private JComboBox<String> RaceComboBox;
     private JPanel RaceSortPanel;
     private JLabel RaceText;
@@ -18,7 +20,7 @@ public class MainUI extends JFrame{
     private JLabel SearchByText;
     private JComboBox<String> SpeciesComboBox;
     private JPanel SpeciesSortPanel;
-    private JScrollPane tablePanel2;
+    private JScrollPane tablePanel;
     public Connection connection;
 
     public MainUI() throws SQLException {
@@ -40,13 +42,9 @@ public class MainUI extends JFrame{
         RaceText = new JLabel();
         RaceComboBox = new JComboBox<>();
         SearchButton = new JButton();
-        MiddlePanel = new JPanel();
         BottomPanel = new JPanel();
-
-        JScrollPane tablePanel = new JScrollPane();
-        tablePanel.getViewport().add(addInitialTable());
-
-        tablePanel2 = new JScrollPane();
+        SearchResultScrollPane = new JScrollPane();
+        SearchResultPanel = new JPanel();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 153, 102));
@@ -115,20 +113,13 @@ public class MainUI extends JFrame{
 
         getContentPane().add(SearchPanel);
 
-        MiddlePanel.setBackground(new java.awt.Color(204, 153, 0));
+        //SearchResultScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        SearchResultPanel.setBackground(new java.awt.Color(204, 153, 0));
+        SearchResultPanel.setLayout(new java.awt.GridLayout(12, 5, 5, 5));
+        SearchResultScrollPane.setViewportView(SearchResultPanel);
 
-        GroupLayout MiddlePanelLayout = new GroupLayout(MiddlePanel);
-        MiddlePanel.setLayout(MiddlePanelLayout);
-        MiddlePanelLayout.setHorizontalGroup(
-                MiddlePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGap(0, 801, Short.MAX_VALUE)
-        );
-        MiddlePanelLayout.setVerticalGroup(
-                MiddlePanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGap(0, 161, Short.MAX_VALUE)
-        );
-        //getContentPane().add(MiddlePanel);
-        getContentPane().add(tablePanel2);
+        getContentPane().add(SearchResultScrollPane);
+
         BottomPanel.setBackground(new java.awt.Color(204, 51, 0));
 
         GroupLayout BottomPanelLayout = new GroupLayout(BottomPanel);
@@ -142,49 +133,57 @@ public class MainUI extends JFrame{
                         .addGap(0, 333, Short.MAX_VALUE)
         );
 
-        //getContentPane().add(BottomPanel);
+        tablePanel = new JScrollPane();
+        tablePanel.getViewport().add(addInitialTable());
         getContentPane().add(tablePanel);
         pack();
     }
 
-    private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {
+    private void SearchButtonActionPerformed(ActionEvent evt) throws SQLException {
         System.out.println(RegionComboBox.getSelectedItem());
         System.out.println(SpeciesComboBox.getSelectedItem());
         System.out.println(RaceComboBox.getSelectedItem());
         System.out.println("Update table");
-        tablePanel2.getViewport().removeAll();
-        tablePanel2.getViewport().add(addLoreTable());
+        SearchResultPanel.removeAll();
+        championSearch();
+        SearchResultScrollPane.setViewportView(SearchResultPanel);
+        pack();
     }
 
-    private JTable addLoreTable() throws SQLException {
-        String columns[] = {"Name","REGION", "SPECIES", "RACE"};
-        String[][] championRows = new String[159][4];
+    private void championSearch() throws SQLException {
 
-
-        String query = "SELECT * FROM lore";
+        String query = "SELECT NAME FROM lore";
 
         if (!RegionComboBox.getSelectedItem().equals("All")) {
-            query += " WHERE REGION = " + "'"+ RegionComboBox.getSelectedItem()+ "'" + " AND";
+            query += " WHERE REGION = " + "'"+ RegionComboBox.getSelectedItem()+ "'";
         }
         if (!SpeciesComboBox.getSelectedItem().equals("All")){
-            query += " SPECIES = " + "'"+ SpeciesComboBox.getSelectedItem()+ "'" + " AND";
+            if (query.endsWith("lore")){
+                query += " WHERE SPECIES = " + "'"+ SpeciesComboBox.getSelectedItem()+ "'";
+            } else {
+                query += " AND SPECIES = " + "'"+ SpeciesComboBox.getSelectedItem()+ "'";
+            }
+
+
         }
         if (!RaceComboBox.getSelectedItem().equals("All")){
-            query += " RACE = " + "'" + RaceComboBox.getSelectedItem()+ "'";
+            if (query.endsWith("lore")) {
+                query += " WHERE RACE = " + "'" + RaceComboBox.getSelectedItem()+ "'";
+            } else {
+                query += " AND RACE = " + "'" + RaceComboBox.getSelectedItem()+ "'";
+            }
         }
 
         System.out.println(query);
         Statement st = connection.createStatement();
         ResultSet result = st.executeQuery(query);
-        int row = 0;
+        SearchResultPanel.removeAll();
         while (result.next()) {
-            championRows[row][0] = result.getString(1);
-            championRows[row][1] = "" + result.getString(2);
-            championRows[row][2] = "" + result.getString(3);
-            championRows[row][3] = "" + result.getString(4);
-            row++;
+            JButton button = new JButton();
+            button.setText(result.getString(1));
+            SearchResultPanel.add(button);
         }
-        return new JTable(championRows, columns);
+
     }
 
     private JTable addInitialTable() throws SQLException {

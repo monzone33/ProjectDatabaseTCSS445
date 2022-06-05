@@ -4,25 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95547c82-0ccb-4119-8a40-9968ff5b1207" name="Changes" comment="inital new branch Commit">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/com/intellij/uiDesigner/core/AbstractLayout.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/com/intellij/uiDesigner/core/DimensionInfo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/com/intellij/uiDesigner/core/GridConstraints.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/com/intellij/uiDesigner/core/GridLayoutManager.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/com/intellij/uiDesigner/core/HorizontalInfo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/com/intellij/uiDesigner/core/LayoutState.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/com/intellij/uiDesigner/core/Spacer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/com/intellij/uiDesigner/core/SupportCode$TextWithMnemonic.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/com/intellij/uiDesigner/core/SupportCode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/com/intellij/uiDesigner/core/Util.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/com/intellij/uiDesigner/core/VerticalInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/Tester$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/Tester.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/Tester.class" afterDir="false" />
+    <list default="true" id="95547c82-0ccb-4119-8a40-9968ff5b1207" name="Changes" comment="Second table and searching">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/MainUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/MainUI$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tester.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tester.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,17 +77,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Tester" />
@@ -120,6 +94,7 @@
       <option name="presentableId" value="Default" />
       <updated>1654322508527</updated>
       <workItem from="1654410181351" duration="5399000" />
+      <workItem from="1654460210950" duration="3553000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1654322878364</created>
@@ -170,7 +145,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654382608037</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Second table and searching">
+      <created>1654419034263</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1654419034263</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
