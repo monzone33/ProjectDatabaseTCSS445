@@ -27,8 +27,7 @@ public class MainUI extends JFrame{
         createGUI();
     }
 
-    public void createGUI() throws SQLException {
-        connection = getConnection();
+    private void initComponents(){
         SearchPanel = new JPanel();
         SearchByPanel = new JPanel();
         SearchByText = new JLabel();
@@ -45,13 +44,17 @@ public class MainUI extends JFrame{
         BottomPanel = new JPanel();
         SearchResultScrollPane = new JScrollPane();
         SearchResultPanel = new JPanel();
+    }
 
+    private void mainFrameSetup(){
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 153, 102));
         setPreferredSize(new java.awt.Dimension(1200, 600));
         setSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+    }
 
+    private void searchPanelSetup(){
         SearchPanel.setBackground(new java.awt.Color(102, 102, 0));
 
         SearchByPanel.setPreferredSize(new java.awt.Dimension(80, 40));
@@ -110,9 +113,9 @@ public class MainUI extends JFrame{
         });
 
         SearchPanel.add(SearchButton);
+    }
 
-        getContentPane().add(SearchPanel);
-
+    private void searchResultSetup() throws SQLException {
         //SearchResultScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         SearchResultPanel.setBackground(new java.awt.Color(204, 153, 0));
         SearchResultPanel.setLayout(new java.awt.GridLayout(12, 5, 5, 5));
@@ -135,6 +138,15 @@ public class MainUI extends JFrame{
 
         tablePanel = new JScrollPane();
         tablePanel.getViewport().add(addInitialTable());
+    }
+
+    public void createGUI() throws SQLException {
+        connection = getConnection();
+        initComponents();
+        mainFrameSetup();
+        searchPanelSetup();
+        getContentPane().add(SearchPanel);
+        searchResultSetup();
         getContentPane().add(tablePanel);
         pack();
     }

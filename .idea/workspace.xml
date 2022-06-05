@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95547c82-0ccb-4119-8a40-9968ff5b1207" name="Changes" comment="Second table and searching">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/MainUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/MainUI$1.class" afterDir="false" />
+    <list default="true" id="95547c82-0ccb-4119-8a40-9968ff5b1207" name="Changes" comment="Search now return champions in terms of button,&#10;query logic is fix,&#10;Middle panel is now changed to searchpanel with a scroll pane">
+      <change beforePath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/mainUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/mainUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MainUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,7 +93,7 @@
       <option name="presentableId" value="Default" />
       <updated>1654322508527</updated>
       <workItem from="1654410181351" duration="5399000" />
-      <workItem from="1654460210950" duration="3553000" />
+      <workItem from="1654460210950" duration="4576000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1654322878364</created>
@@ -152,7 +151,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654419034263</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Search now return champions in terms of button,&#10;query logic is fix,&#10;Middle panel is now changed to searchpanel with a scroll pane">
+      <created>1654464655887</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1654464655887</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -177,6 +183,7 @@
     <MESSAGE value="Change file name." />
     <MESSAGE value="inital new branch Commit" />
     <MESSAGE value="Second table and searching" />
-    <option name="LAST_COMMIT_MESSAGE" value="Second table and searching" />
+    <MESSAGE value="Search now return champions in terms of button,&#10;query logic is fix,&#10;Middle panel is now changed to searchpanel with a scroll pane" />
+    <option name="LAST_COMMIT_MESSAGE" value="Search now return champions in terms of button,&#10;query logic is fix,&#10;Middle panel is now changed to searchpanel with a scroll pane" />
   </component>
 </project>
