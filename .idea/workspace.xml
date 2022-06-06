@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95547c82-0ccb-4119-8a40-9968ff5b1207" name="Changes" comment="Fix formating in ChampionUI's stats for when level update">
+    <list default="true" id="95547c82-0ccb-4119-8a40-9968ff5b1207" name="Changes" comment="Code clean up">
+      <change afterPath="$PROJECT_DIR$/src/BDFIcon.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/ChampionUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/ChampionUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ChampionUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChampionUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/MainUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/MainUI$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/MainUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/MainUI$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +58,11 @@
     <property name="project.structure.side.proportion" value="0.22096609" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Bao\IdeaProjects\ProjectDatabaseTCSS445\src" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.Tester">
     <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Test" />
@@ -73,6 +81,17 @@
     <configuration name="mainUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="mainUI" />
       <module name="ProjectDatabaseTCSS445" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -97,7 +116,8 @@
       <workItem from="1654460210950" duration="4841000" />
       <workItem from="1654467411344" duration="4959000" />
       <workItem from="1654473350235" duration="275000" />
-      <workItem from="1654484617937" duration="5479000" />
+      <workItem from="1654484617937" duration="5626000" />
+      <workItem from="1654491845639" duration="536000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1654322878364</created>
@@ -274,7 +294,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654489967880</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Code clean up">
+      <created>1654490258910</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1654490258910</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -315,6 +342,7 @@
     <MESSAGE value="Forgot to update/setText for stats labels" />
     <MESSAGE value="Level update works for all stats&#10;need to work on format (rounding decimals)" />
     <MESSAGE value="Fix formating in ChampionUI's stats for when level update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix formating in ChampionUI's stats for when level update" />
+    <MESSAGE value="Code clean up" />
+    <option name="LAST_COMMIT_MESSAGE" value="Code clean up" />
   </component>
 </project>

@@ -16,7 +16,7 @@ public class MainUI extends JFrame{
     private JLabel RegionText;
     private JButton SearchButton;
     private JPanel SearchPanel;
-    private JLabel SepciesText;
+    private JLabel SpeciesText;
     private JPanel SearchByPanel;
     private JLabel SearchByText;
     private JComboBox<String> SpeciesComboBox;
@@ -36,7 +36,7 @@ public class MainUI extends JFrame{
         RegionText = new JLabel();
         RegionComboBox = new JComboBox<>();
         SpeciesSortPanel = new JPanel();
-        SepciesText = new JLabel();
+        SpeciesText = new JLabel();
         SpeciesComboBox = new JComboBox<>();
         RaceSortPanel = new JPanel();
         RaceText = new JLabel();
@@ -49,6 +49,8 @@ public class MainUI extends JFrame{
 
     private void mainFrameSetup(){
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        ImageIcon icon = new ImageIcon("/BDFIcon.png");
+        setIconImage(icon.getImage());
         setBackground(new java.awt.Color(0, 153, 102));
         setPreferredSize(new java.awt.Dimension(1200, 600));
         setSize(new java.awt.Dimension(800, 600));
@@ -79,9 +81,9 @@ public class MainUI extends JFrame{
 
         SpeciesSortPanel.setPreferredSize(new java.awt.Dimension(180, 40));
 
-        SepciesText.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        SepciesText.setText("Species:");
-        SpeciesSortPanel.add(SepciesText);
+        SpeciesText.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        SpeciesText.setText("Species:");
+        SpeciesSortPanel.add(SpeciesText);
 
         SpeciesComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "All","Ascended", "Celestial", "Demon", "Other", "Sapient", "Spirit", "Undead" }));
         SpeciesSortPanel.add(SpeciesComboBox);
@@ -103,13 +105,11 @@ public class MainUI extends JFrame{
 
         SearchButton.setText("Search");
 
-        SearchButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                try {
-                    SearchButtonActionPerformed(evt);
-                } catch(SQLException throwables) {
-                    throwables.printStackTrace();
-                }
+        SearchButton.addActionListener(evt -> {
+            try {
+                SearchButtonActionPerformed();
+            } catch(SQLException throwables) {
+                throwables.printStackTrace();
             }
         });
 
@@ -149,10 +149,12 @@ public class MainUI extends JFrame{
         getContentPane().add(SearchPanel);
         searchResultSetup();
         getContentPane().add(tablePanel);
+        setTitle("Brain Dead Feeder");
+
         pack();
     }
 
-    private void SearchButtonActionPerformed(ActionEvent evt) throws SQLException {
+    private void SearchButtonActionPerformed() throws SQLException {
         System.out.println(RegionComboBox.getSelectedItem());
         System.out.println(SpeciesComboBox.getSelectedItem());
         System.out.println(RaceComboBox.getSelectedItem());
@@ -199,13 +201,11 @@ public class MainUI extends JFrame{
             button.setText(result.getString(1));
             SearchResultPanel.add(button);
 
-            button.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    try {
-                        ChampionButtonPressed(button.getText(), connection);
-                    } catch(SQLException throwables) {
-                        throwables.printStackTrace();
-                    }
+            button.addActionListener(evt -> {
+                try {
+                    ChampionButtonPressed(button.getText(), connection);
+                } catch(SQLException throwables) {
+                    throwables.printStackTrace();
                 }
             });
         }
@@ -213,7 +213,7 @@ public class MainUI extends JFrame{
     }
 
     private JTable addInitialTable() throws SQLException {
-        String columns[] = {"Name", "HP", "HP+", "HPREGEN", "HPREGEN+", "MANA", "MANA+", "MANAREGEN", "MANAREGEN+",
+        String[] columns = {"Name", "HP", "HP+", "HPREGEN", "HPREGEN+", "MANA", "MANA+", "MANAREGEN", "MANAREGEN+",
                 "AD", "AD+", "AS", "AS+", "ARMOR", "ARMOR+", "MR", "MR+", "MS", "RANGE"};
         String[][] championRows = new String[159][159];
         String query = "SELECT * FROM CHAMPIONSTATS";
