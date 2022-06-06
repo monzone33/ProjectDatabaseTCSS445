@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.util.Objects;
 
 public class ChampionUI extends JFrame {
     private JPanel ADPanel;
@@ -89,7 +90,8 @@ public class ChampionUI extends JFrame {
 
         UpdateButton.addActionListener(evt -> {
             try {
-                updateChampionLevel((String) LevelComboBox.getSelectedItem(), championName);
+                updateChampionLevel((String) Objects.requireNonNull(LevelComboBox.getSelectedItem()),
+                        championName);
             } catch(SQLException throwable) {
                 throwable.printStackTrace();
             }
@@ -116,26 +118,26 @@ public class ChampionUI extends JFrame {
             HpText.setText(String.valueOf(Integer.parseInt(HpText.getText()) +
                     (result.getInt(1)) *Integer.parseInt(level)));
 
-            HpRegenText.setText(String.format("%.2f",String.valueOf(Double.parseDouble(HpRegenText.getText()) +
-                    (result.getDouble(2)) *Integer.parseInt(level))));
+            HpRegenText.setText(String.format("%.2f", (Double.parseDouble(HpRegenText.getText()) +
+                    (result.getDouble(2)) * Integer.parseInt(level))));
 
-            ResourcePanelText.setText(String.valueOf(Double.parseDouble(ResourcePanelText.getText()) +
-                    (result.getDouble(3)) *Integer.parseInt(level)));
+            ResourcePanelText.setText(String.format("%.2f", (Double.parseDouble(ResourcePanelText.getText()) +
+                    (result.getDouble(3)) * Integer.parseInt(level))));
 
-            ResourceRegenText.setText(String.valueOf(Double.parseDouble(ResourceRegenText.getText()) +
-                    (result.getDouble(4)) *Integer.parseInt(level)));
+            ResourceRegenText.setText(String.format("%.2f", (Double.parseDouble(ResourceRegenText.getText()) +
+                    (result.getDouble(4)) * Integer.parseInt(level))));
 
-            ADText.setText(String.valueOf(Double.parseDouble(ADText.getText()) +
-                    (result.getDouble(5)) *Integer.parseInt(level)));
+            ADText.setText(String.format("%.2f", (Double.parseDouble(ADText.getText()) +
+                    (result.getDouble(5)) * Integer.parseInt(level))));
 
-            AttackSpeedText.setText(String.valueOf(Double.parseDouble(AttackSpeedText.getText()) +
-                    (result.getDouble(6)) *Integer.parseInt(level)));
+            AttackSpeedText.setText(String.format("%.2f", (Double.parseDouble(AttackSpeedText.getText()) +
+                    (result.getDouble(6)) * Integer.parseInt(level))));
 
-            ArmorText.setText(String.valueOf(Double.parseDouble(ArmorText.getText()) +
-                    (result.getDouble(7)) *Integer.parseInt(level)));
+            ArmorText.setText(String.format("%.2f", (Double.parseDouble(ArmorText.getText()) +
+                    (result.getDouble(7)) * Integer.parseInt(level))));
 
-            MRText.setText(String.valueOf(Double.parseDouble(MRText.getText()) +
-                    (result.getDouble(8)) *Integer.parseInt(level)));
+            MRText.setText(String.format("%.2f", (Double.parseDouble(MRText.getText()) +
+                    (result.getDouble(8)) * Integer.parseInt(level))));
         }
 
     }
