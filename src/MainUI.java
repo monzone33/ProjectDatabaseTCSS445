@@ -1,4 +1,9 @@
 import javax.swing.*;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.*;
 
 
@@ -13,8 +18,10 @@ public class MainUI extends JFrame{
     private JPanel RegionSortPanel;
     private JLabel RegionText;
     private JButton SearchButton;
+    private JButton itemsButton;
+    private JButton runesButton;
     private JPanel SearchPanel;
-    private JLabel SpeciesText;
+    private JLabel SepciesText;
     private JPanel SearchByPanel;
     private JLabel SearchByText;
     private JComboBox<String> SpeciesComboBox;
@@ -34,12 +41,14 @@ public class MainUI extends JFrame{
         RegionText = new JLabel();
         RegionComboBox = new JComboBox<>();
         SpeciesSortPanel = new JPanel();
-        SpeciesText = new JLabel();
+        SepciesText = new JLabel();
         SpeciesComboBox = new JComboBox<>();
         RaceSortPanel = new JPanel();
         RaceText = new JLabel();
         RaceComboBox = new JComboBox<>();
         SearchButton = new JButton();
+        itemsButton = new JButton();
+        runesButton = new JButton();
         BottomPanel = new JPanel();
         SearchResultScrollPane = new JScrollPane();
         SearchResultPanel = new JPanel();
@@ -47,8 +56,6 @@ public class MainUI extends JFrame{
 
     private void mainFrameSetup(){
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        ImageIcon icon = new ImageIcon("/BDFIcon.png");
-        setIconImage(icon.getImage());
         setBackground(new java.awt.Color(0, 153, 102));
         setPreferredSize(new java.awt.Dimension(1200, 600));
         setSize(new java.awt.Dimension(800, 600));
@@ -79,9 +86,9 @@ public class MainUI extends JFrame{
 
         SpeciesSortPanel.setPreferredSize(new java.awt.Dimension(180, 40));
 
-        SpeciesText.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        SpeciesText.setText("Species:");
-        SpeciesSortPanel.add(SpeciesText);
+        SepciesText.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        SepciesText.setText("Species:");
+        SpeciesSortPanel.add(SepciesText);
 
         SpeciesComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "All","Ascended", "Celestial", "Demon", "Other", "Sapient", "Spirit", "Undead" }));
         SpeciesSortPanel.add(SpeciesComboBox);
@@ -103,15 +110,32 @@ public class MainUI extends JFrame{
 
         SearchButton.setText("Search");
 
-        SearchButton.addActionListener(evt -> {
-            try {
-                SearchButtonActionPerformed();
-            } catch(SQLException throwable) {
-                throwable.printStackTrace();
+        SearchButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                try {
+                    SearchButtonActionPerformed(evt);
+                } catch(SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             }
         });
 
+        itemsButton.setText("Items");
+
+        itemsButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                try {
+                    itemsButton(evt);
+                } catch(SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        });
+        runesButton.setText("Runes");
+
         SearchPanel.add(SearchButton);
+        SearchPanel.add(itemsButton);
+        SearchPanel.add(runesButton);
     }
 
     private void searchResultSetup() throws SQLException {
@@ -147,12 +171,10 @@ public class MainUI extends JFrame{
         getContentPane().add(SearchPanel);
         searchResultSetup();
         getContentPane().add(tablePanel);
-        setTitle("Brain Dead Feeder");
-
         pack();
     }
 
-    private void SearchButtonActionPerformed() throws SQLException {
+    private void SearchButtonActionPerformed(ActionEvent evt) throws SQLException {
         System.out.println(RegionComboBox.getSelectedItem());
         System.out.println(SpeciesComboBox.getSelectedItem());
         System.out.println(RaceComboBox.getSelectedItem());
@@ -199,11 +221,13 @@ public class MainUI extends JFrame{
             button.setText(result.getString(1));
             SearchResultPanel.add(button);
 
-            button.addActionListener(evt -> {
-                try {
-                    ChampionButtonPressed(button.getText(), connection);
-                } catch(SQLException throwables) {
-                    throwables.printStackTrace();
+            button.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    try {
+                        ChampionButtonPressed(button.getText(), connection);
+                    } catch(SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
                 }
             });
         }
@@ -211,7 +235,7 @@ public class MainUI extends JFrame{
     }
 
     private JTable addInitialTable() throws SQLException {
-        String[] columns = {"Name", "HP", "HP+", "HPREGEN", "HPREGEN+", "MANA", "MANA+", "MANAREGEN", "MANAREGEN+",
+        String columns[] = {"Name", "HP", "HP+", "HPREGEN", "HPREGEN+", "MANA", "MANA+", "MANAREG", "MANAREG+",
                 "AD", "AD+", "AS", "AS+", "ARMOR", "ARMOR+", "MR", "MR+", "MS", "RANGE"};
         String[][] championRows = new String[159][159];
         String query = "SELECT * FROM CHAMPIONSTATS";
@@ -243,13 +267,63 @@ public class MainUI extends JFrame{
         return new JTable(championRows, columns);
     }
 
+    public void itemsButton(ActionEvent evt) throws SQLException {
+        String[] columns = {"NAME", "GRADE", "Cost", "HEALTH", "MANA", "HPHREGEN",
+                            "MANARE", "ABILITYHASTE", "ATTACKDAMAGE", "ATTACKSPEED",
+                            "CRITICALCHANCE", "LIFESTEAL", "OMNIVAMP", "LETHALITY", "ARMORPENETRATION",
+                            "ABILITYPOWER", "MAGICPENETRATION", "ARMOR", "MAGICRESIST", "MOVEMENTSPEED"};
+        String[][] itemRows = new String[206][20];
+        String query = "SELECT * FROM ITEM_STATS";
+        Statement st = connection.createStatement();
+        ResultSet result = st.executeQuery(query);
+        int row = 0;
+        while (result.next()) {
+            itemRows[row][0] = result.getString(1);
+            itemRows[row][1] = "" + result.getString(2);
+            itemRows[row][2] = "" + result.getInt(3);
+            itemRows[row][3] = "" + result.getInt(4);
+            itemRows[row][4] = "" + result.getInt(5);
+            itemRows[row][5] = "" + result.getDouble(6);
+            itemRows[row][6] = "" + result.getDouble(7);
+            itemRows[row][7] = "" + result.getDouble(8);
+            itemRows[row][8] = "" + result.getInt(9);
+            itemRows[row][9] = "" + result.getDouble(10);
+            itemRows[row][10] = "" + result.getDouble(11);
+            itemRows[row][11] = "" + result.getDouble(12);
+            itemRows[row][12] = "" + result.getDouble(13);
+            itemRows[row][13] = "" + result.getDouble(14);
+            itemRows[row][14] = "" + result.getDouble(15);
+            itemRows[row][15] = "" + result.getInt(16);
+            itemRows[row][16] = "" + result.getDouble(17);
+            itemRows[row][17] = "" + result.getInt(18);
+            itemRows[row][18] = "" + result.getInt(19);
+            itemRows[row][19] = "" + result.getDouble(19);
+            row++;
+        }
+        JTable itemsTable = new JTable(itemRows, columns) {
+            @Override
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                Component component = super.prepareRenderer(renderer, row, column);
+                int rendererWidth = component.getPreferredSize().width;
+                TableColumn tableColumn = getColumnModel().getColumn(column);
+                tableColumn.setPreferredWidth(Math.max(rendererWidth + getIntercellSpacing().width, tableColumn.getPreferredWidth()));
+                return component;
+            }
+        };
+        getContentPane().remove(tablePanel);
+        itemsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tablePanel = new JScrollPane(itemsTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        getContentPane().add(tablePanel);
+        pack();
+    }
+
     /**
      * Returns a connection to the database.
      */
     public Connection getConnection() {
-        String url = "jdbc:mysql://localhost:3306/tcss445project";
+        String url = "jdbc:mysql://localhost:3306/project";
         String user = "root";
-        String password = "Tcss445";
+        String password = "123456";
         try {
             return DriverManager.getConnection(url, user, password);
         } catch(final SQLException e) {
