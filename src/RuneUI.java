@@ -172,7 +172,8 @@ public class RuneUI extends JFrame {
 
     private void allStats(String runeName) throws SQLException {
         pathPanel = new JPanel();
-        pathLabel = new JLabel();JLabel pathText = new JLabel();
+        pathLabel = new JLabel();
+        pathText = new JLabel();
         keystonePanel = new JPanel();
         keystoneLabel = new JLabel();
         keystoneText = new JLabel();
@@ -288,6 +289,37 @@ public class RuneUI extends JFrame {
         percentManaLabel.setText("Percent Mana:");
         armorLabel.setText("Armor:");
         MRLabel.setText("Magic Resist:");
+
+        pathPanel.add(pathLabel);
+        pathLabel.add(pathText);
+        statsPanel.add(pathPanel);
+        keystonePanel.add(keystoneLabel);
+        keystonePanel.add(keystoneText);
+        statsPanel.add(keystonePanel);
+        shardPanel.add(shardLabel);
+        shardPanel.add(shardText);
+        statsPanel.add(shardPanel);
+        pathPanel.add(pathLabel);
+        pathLabel.add(pathText);
+        statsPanel.add(pathPanel);
+        pathPanel.add(pathLabel);
+        pathLabel.add(pathText);
+        statsPanel.add(pathPanel);
+        pathPanel.add(pathLabel);
+        pathLabel.add(pathText);
+        statsPanel.add(pathPanel);
+        pathPanel.add(pathLabel);
+        pathLabel.add(pathText);
+        statsPanel.add(pathPanel);
+        pathPanel.add(pathLabel);
+        pathLabel.add(pathText);
+        statsPanel.add(pathPanel);
+        pathPanel.add(pathLabel);
+        pathLabel.add(pathText);
+        statsPanel.add(pathPanel);
+        pathPanel.add(pathLabel);
+        pathLabel.add(pathText);
+        statsPanel.add(pathPanel);
 
     }
 
