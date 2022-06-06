@@ -252,8 +252,6 @@ public class ChampionUI extends JFrame {
         TopPanel = new JPanel();
         MiddlePanel = new JPanel();
         StatsPanel = new JPanel();
-
-
         BottomPanel = new JPanel();
 
         //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);

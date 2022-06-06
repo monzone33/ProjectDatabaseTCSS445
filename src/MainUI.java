@@ -1,6 +1,4 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.*;
 
 
@@ -108,8 +106,8 @@ public class MainUI extends JFrame{
         SearchButton.addActionListener(evt -> {
             try {
                 SearchButtonActionPerformed();
-            } catch(SQLException throwables) {
-                throwables.printStackTrace();
+            } catch(SQLException throwable) {
+                throwable.printStackTrace();
             }
         });
 
