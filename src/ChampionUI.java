@@ -112,9 +112,18 @@ public class ChampionUI extends JFrame {
         Statement st = connection.createStatement();
         ResultSet result = st.executeQuery(query);
 
-//        while (result.next()) {
-//            NameText.setText(result.getString(1));
-//        }
+        while (result.next()) {
+            HpText.setText(String.valueOf(Integer.parseInt(HpText.getText()) +
+                    (result.getInt(1)) *Integer.parseInt(level)));
+
+//            HpRegenText.setText(String.valueOf(result.getDouble(2)));
+//            ResourcePanelText.setText(String.valueOf(result.getDouble(3)));
+//            ResourceRegenText.setText(String.valueOf(result.getDouble(4)));
+//            ADText.setText(String.valueOf(result.getInt(5)));
+//            AttackSpeedText.setText(String.valueOf(result.getDouble(6)));
+//            ArmorText.setText(String.valueOf(result.getInt(7)));
+//            MRText.setText(String.valueOf(result.getDouble(8)));
+        }
 
     }
 
