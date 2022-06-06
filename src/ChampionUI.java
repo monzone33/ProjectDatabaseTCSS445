@@ -116,17 +116,26 @@ public class ChampionUI extends JFrame {
             HpText.setText(String.valueOf(Integer.parseInt(HpText.getText()) +
                     (result.getInt(1)) *Integer.parseInt(level)));
 
-            HpRegenText.setText(String.valueOf(Double.parseDouble(HpRegenText.getText()) +
-                    (result.getDouble(2)) *Integer.parseInt(level)));
+            HpRegenText.setText(String.format("%.2f",String.valueOf(Double.parseDouble(HpRegenText.getText()) +
+                    (result.getDouble(2)) *Integer.parseInt(level))));
 
+            ResourcePanelText.setText(String.valueOf(Double.parseDouble(ResourcePanelText.getText()) +
+                    (result.getDouble(3)) *Integer.parseInt(level)));
 
-//            HpRegenText.setText(String.valueOf(result.getDouble(2)));
-//            ResourcePanelText.setText(String.valueOf(result.getDouble(3)));
-//            ResourceRegenText.setText(String.valueOf(result.getDouble(4)));
-//            ADText.setText(String.valueOf(result.getInt(5)));
-//            AttackSpeedText.setText(String.valueOf(result.getDouble(6)));
-//            ArmorText.setText(String.valueOf(result.getInt(7)));
-//            MRText.setText(String.valueOf(result.getDouble(8)));
+            ResourceRegenText.setText(String.valueOf(Double.parseDouble(ResourceRegenText.getText()) +
+                    (result.getDouble(4)) *Integer.parseInt(level)));
+
+            ADText.setText(String.valueOf(Double.parseDouble(ADText.getText()) +
+                    (result.getDouble(5)) *Integer.parseInt(level)));
+
+            AttackSpeedText.setText(String.valueOf(Double.parseDouble(AttackSpeedText.getText()) +
+                    (result.getDouble(6)) *Integer.parseInt(level)));
+
+            ArmorText.setText(String.valueOf(Double.parseDouble(ArmorText.getText()) +
+                    (result.getDouble(7)) *Integer.parseInt(level)));
+
+            MRText.setText(String.valueOf(Double.parseDouble(MRText.getText()) +
+                    (result.getDouble(8)) *Integer.parseInt(level)));
         }
 
     }
