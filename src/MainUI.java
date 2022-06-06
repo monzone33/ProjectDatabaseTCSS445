@@ -2,6 +2,8 @@ import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.*;
 
 
@@ -139,6 +141,18 @@ public class MainUI extends JFrame{
                     pack();
                 } catch (SQLException e) {
                     e.printStackTrace();
+                }
+            }
+        });
+
+        runesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    runeButton();
+                }
+                catch (SQLException throwables){
+                    throwables.printStackTrace();
                 }
             }
         });
