@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 
 public class Tester {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {
                 new MainUI().setVisible(true);
@@ -18,6 +18,7 @@ public class Tester {
                 e.printStackTrace();
             }
         });
+
         /*
         String url = "jdbc:mysql://localhost:3306/project";
 
