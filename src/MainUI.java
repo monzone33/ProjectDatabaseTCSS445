@@ -128,7 +128,15 @@ public class MainUI extends JFrame{
             }
         });
         runesButton.setText("Runes");
-        
+
+        runesButton.addActionListener(evt -> {
+            try {
+                runeButton();
+            } catch(SQLException throwable) {
+                throwable.printStackTrace();
+            }
+        });
+
         championButton.setText("ChampionStats");
         championButton.addActionListener(evt -> {
             try {
@@ -193,6 +201,7 @@ public class MainUI extends JFrame{
         SearchResultScrollPane.setViewportView(SearchResultPanel);
         pack();
     }
+
 
     private void ChampionButtonPressed(String ChampName, Connection connection) throws SQLException {
         System.out.println(ChampName);
@@ -323,11 +332,11 @@ public class MainUI extends JFrame{
     }
 
     public void runeButton()throws SQLException{
-        String[] columns = {"NAME", "PATH", "KEYSTONE", "SHARD", "COOLDOWN", "DAMAGE", "PERCENTDAMAGE", "LETHALITY", "MAGICPENETRATION", "SHIELDING",
+        String[] columns = {" ", "PATH", "KEYSTONE", "SHARD", "COOLDOWN", "DAMAGE", "PERCENTDAMAGE", "LETHALITY", "MAGICPENETRATION", "SHIELDING",
                 "PERCENTSHIELDING", "ATTACKSPEED", "TENACITY", "LIFESTEAL", "ABILITYHASTE", "ITEMHASTE", "SPELLHASTE", "RANGE", "HEAL", "PERCENTHEAL",
                 "MOVEMENTSPEED", "PERCENTMOVEMENTSPEED", "ATTACKDAMAGE", "ABILITYPOWER", "HEALTH", "PERCENTHEALTH", "MANA", "PERCENTMANA", "ARMOR", "MAGICRESIST"};
 
-        String[][] runeRows = new String[33][30];
+        String[][] runeRows = new String[63][30];
         String query = "SELECT * FROM RUNES";
         Statement st = connection.createStatement();
         ResultSet result = st.executeQuery(query);
@@ -365,6 +374,22 @@ public class MainUI extends JFrame{
             runeRows[row][29] = result.getString(30);
             row++;
         }
+
+        JTable runesTable = new JTable(runeRows, columns) {
+            @Override
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                Component component = super.prepareRenderer(renderer, row, column);
+                int rendererWidth = component.getPreferredSize().width;
+                TableColumn tableColumn = getColumnModel().getColumn(column);
+                tableColumn.setPreferredWidth(Math.max(rendererWidth + getIntercellSpacing().width, tableColumn.getPreferredWidth()));
+                return component;
+            }
+        };
+        getContentPane().remove(tablePanel);
+        runesTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tablePanel = new JScrollPane(runesTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        getContentPane().add(tablePanel);
+        pack();
     }
 
     /**
