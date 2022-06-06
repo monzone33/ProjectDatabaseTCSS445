@@ -307,6 +307,51 @@ public class MainUI extends JFrame{
         pack();
     }
 
+    public void runeButton()throws SQLException{
+        String[] columns = {"NAME", "PATH", "KEYSTONE", "SHARD", "COOLDOWN", "DAMAGE", "PERCENTDAMAGE", "LETHALITY", "MAGICPENETRATION", "SHIELDING",
+                "PERCENTSHIELDING", "ATTACKSPEED", "TENACITY", "LIFESTEAL", "ABILITYHASTE", "ITEMHASTE", "SPELLHASTE", "RANGE", "HEAL", "PERCENTHEAL",
+                "MOVEMENTSPEED", "PERCENTMOVEMENTSPEED", "ATTACKDAMAGE", "ABILITYPOWER", "HEALTH", "PERCENTHEALTH", "MANA", "PERCENTMANA", "ARMOR", "MAGICRESIST"};
+
+        String[][] runeRows = new String[33][30];
+        String query = "SELECT * FROM RUNES";
+        Statement st = connection.createStatement();
+        ResultSet result = st.executeQuery(query);
+        int row = 0;
+        while (result.next()) {
+            runeRows[row][0] = result.getString(1);
+            runeRows[row][1] = result.getString(2);
+            runeRows[row][2] = result.getString(3);
+            runeRows[row][3] = result.getString(4);
+            runeRows[row][4] = result.getString(5);
+            runeRows[row][5] = result.getString(6);
+            runeRows[row][6] = result.getString(7);
+            runeRows[row][7] = result.getString(8);
+            runeRows[row][8] = result.getString(9);
+            runeRows[row][9] = result.getString(10);
+            runeRows[row][10] = result.getString(11);
+            runeRows[row][11] = result.getString(12);
+            runeRows[row][12] = result.getString(13);
+            runeRows[row][13] = result.getString(14);
+            runeRows[row][14] = result.getString(15);
+            runeRows[row][15] = result.getString(16);
+            runeRows[row][16] = result.getString(17);
+            runeRows[row][17] = result.getString(18);
+            runeRows[row][18] = result.getString(19);
+            runeRows[row][19] = result.getString(20);
+            runeRows[row][20] = result.getString(21);
+            runeRows[row][21] = result.getString(22);
+            runeRows[row][22] = result.getString(23);
+            runeRows[row][23] = result.getString(24);
+            runeRows[row][24] = result.getString(25);
+            runeRows[row][25] = result.getString(26);
+            runeRows[row][26] = result.getString(27);
+            runeRows[row][27] = result.getString(28);
+            runeRows[row][28] = result.getString(29);
+            runeRows[row][29] = result.getString(30);
+            row++;
+        }
+    }
+
     /**
      * Returns a connection to the database.
      */
