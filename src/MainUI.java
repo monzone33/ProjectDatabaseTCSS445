@@ -350,6 +350,22 @@ public class MainUI extends JFrame{
             runeRows[row][29] = result.getString(30);
             row++;
         }
+
+        JTable runesTable = new JTable(runeRows, columns) {
+            @Override
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                Component component = super.prepareRenderer(renderer, row, column);
+                int rendererWidth = component.getPreferredSize().width;
+                TableColumn tableColumn = getColumnModel().getColumn(column);
+                tableColumn.setPreferredWidth(Math.max(rendererWidth + getIntercellSpacing().width, tableColumn.getPreferredWidth()));
+                return component;
+            }
+        };
+        getContentPane().remove(tablePanel);
+        runesTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tablePanel = new JScrollPane(runesTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        getContentPane().add(tablePanel);
+        pack();
     }
 
     /**
