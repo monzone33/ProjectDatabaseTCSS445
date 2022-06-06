@@ -18,6 +18,7 @@ public class MainUI extends JFrame{
     private JButton SearchButton;
     private JButton itemsButton;
     private JButton runesButton;
+    private JButton championButton;
     private JPanel SearchPanel;
     private JLabel SpeciesText;
     private JPanel SearchByPanel;
@@ -47,6 +48,7 @@ public class MainUI extends JFrame{
         SearchButton = new JButton();
         itemsButton = new JButton();
         runesButton = new JButton();
+        championButton = new JButton();
         BottomPanel = new JPanel();
         SearchResultScrollPane = new JScrollPane();
         SearchResultPanel = new JPanel();
@@ -126,10 +128,25 @@ public class MainUI extends JFrame{
             }
         });
         runesButton.setText("Runes");
+        
+        championButton.setText("ChampionStats");
+        championButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                try {
+                    getContentPane().remove(tablePanel);
+                    tablePanel = new JScrollPane(addInitialTable(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+                    getContentPane().add(tablePanel);
+                    pack();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         SearchPanel.add(SearchButton);
         SearchPanel.add(itemsButton);
         SearchPanel.add(runesButton);
+        SearchPanel.add(championButton);
     }
 
     private void searchResultSetup() throws SQLException {
