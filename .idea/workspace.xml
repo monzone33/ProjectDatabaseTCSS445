@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95547c82-0ccb-4119-8a40-9968ff5b1207" name="Changes" comment="Added levelpanel and level update changes to&#10;ChampionUI">
+    <list default="true" id="95547c82-0ccb-4119-8a40-9968ff5b1207" name="Changes" comment="UpdateButton now grab level combo box selection">
       <change beforePath="$PROJECT_DIR$/src/ChampionUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChampionUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -95,7 +95,7 @@
       <workItem from="1654460210950" duration="4841000" />
       <workItem from="1654467411344" duration="4959000" />
       <workItem from="1654473350235" duration="275000" />
-      <workItem from="1654484617937" duration="1119000" />
+      <workItem from="1654484617937" duration="1449000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1654322878364</created>
@@ -216,7 +216,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654485511485</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="UpdateButton now grab level combo box selection">
+      <created>1654485892678</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1654485892678</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -250,6 +257,7 @@
     <MESSAGE value="ChampionUI now updates everything&#10;also clean up a lot of code and formating of UI" />
     <MESSAGE value="Clean up typo problems from intelliJ" />
     <MESSAGE value="Added levelpanel and level update changes to&#10;ChampionUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added levelpanel and level update changes to&#10;ChampionUI" />
+    <MESSAGE value="UpdateButton now grab level combo box selection" />
+    <option name="LAST_COMMIT_MESSAGE" value="UpdateButton now grab level combo box selection" />
   </component>
 </project>

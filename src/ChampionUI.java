@@ -87,13 +87,38 @@ public class ChampionUI extends JFrame {
         UpdateButton.setText("Update");
         LevelPanel.add(UpdateButton);
 
-        UpdateButton.addActionListener(evt -> updateChampionLevel((String) LevelComboBox.getSelectedItem()));
+        UpdateButton.addActionListener(evt -> {
+            try {
+                updateChampionLevel((String) LevelComboBox.getSelectedItem());
+            } catch(SQLException throwable) {
+                throwable.printStackTrace();
+            }
+        });
 
         getContentPane().add(LevelPanel);
     }
 
-    private void updateChampionLevel(String level){
+    private void updateChampionLevel(String level) throws SQLException {
         System.out.println("Update level " + level);
+        if (level.equals("1")) return;
+
+        String query = "SELECT HPPLUS, HPREGENPLUS, MANAPLUS, " +
+                "MANAREGENPLUS, ADPLUS, ASNPLUS, ARMORPLUS, MRPLUS " +
+                "FROM tcss445project.championstats";
+
+        Statement st = connection.createStatement();
+        ResultSet result = st.executeQuery(query);
+
+        query = "SELECT HP, HPREGEN, MANA, MANAREGEN, " +
+                "AD, ASN, ARMOR, MR FROM tcss445project.championstats";
+
+        st = connection.createStatement();
+        ResultSet result2 = st.executeQuery(query);
+
+        while (result.next()) {
+            NameText.setText(result.getString(1));
+        }
+
     }
 
     private void setUpStatsLabel(String stats) throws SQLException {
