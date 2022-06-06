@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class ChampionUI extends JFrame {
@@ -85,7 +87,13 @@ public class ChampionUI extends JFrame {
         UpdateButton.setText("Update");
         LevelPanel.add(UpdateButton);
 
+        UpdateButton.addActionListener(evt -> updateChampionLevel((String) LevelComboBox.getSelectedItem()));
+
         getContentPane().add(LevelPanel);
+    }
+
+    private void updateChampionLevel(String level){
+        System.out.println("Update level " + level);
     }
 
     private void setUpStatsLabel(String stats) throws SQLException {
@@ -276,8 +284,6 @@ public class ChampionUI extends JFrame {
             setUpStatsLabel(stats[i]);
         }
     }
-
-
 
     private void initComponents() throws SQLException {
 
