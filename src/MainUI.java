@@ -191,7 +191,6 @@ public class MainUI extends JFrame{
     }
 
     private void championSearch() throws SQLException {
-
         String query = "SELECT NAME FROM lore";
 
         if (!RegionComboBox.getSelectedItem().equals("All")) {
@@ -211,7 +210,6 @@ public class MainUI extends JFrame{
                 query += " AND RACE = " + "'" + RaceComboBox.getSelectedItem()+ "'";
             }
         }
-
         System.out.println(query);
         Statement st = connection.createStatement();
         ResultSet result = st.executeQuery(query);
@@ -221,13 +219,11 @@ public class MainUI extends JFrame{
             button.setText(result.getString(1));
             SearchResultPanel.add(button);
 
-            button.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    try {
-                        ChampionButtonPressed(button.getText(), connection);
-                    } catch(SQLException throwables) {
-                        throwables.printStackTrace();
-                    }
+            button.addActionListener(evt -> {
+                try {
+                    ChampionButtonPressed(button.getText(), connection);
+                } catch(SQLException throwable) {
+                    throwable.printStackTrace();
                 }
             });
         }
@@ -321,9 +317,9 @@ public class MainUI extends JFrame{
      * Returns a connection to the database.
      */
     public Connection getConnection() {
-        String url = "jdbc:mysql://localhost:3306/project";
+        String url = "jdbc:mysql://localhost:3306/tcss445project";
         String user = "root";
-        String password = "123456";
+        String password = "Tcss445";
         try {
             return DriverManager.getConnection(url, user, password);
         } catch(final SQLException e) {
