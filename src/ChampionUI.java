@@ -36,6 +36,10 @@ public class ChampionUI extends JFrame {
     private JLabel ResourceRegenLabel;
     private JPanel ResourceRegenPanel;
     private JLabel ResourceRegenText;
+    private JComboBox<String> LevelComboBox;
+    private JLabel LevelLabel;
+    private JPanel LevelPanel;
+    private JButton UpdateButton;
     private JPanel StatsPanel;
     private JPanel TopPanel;
     private final String championName;
@@ -60,11 +64,28 @@ public class ChampionUI extends JFrame {
             NameText.setText(result.getString(1));
         }
 
-        TopPanel.setLayout(new javax.swing.BoxLayout(TopPanel, javax.swing.BoxLayout.Y_AXIS));
         TopPanel.add(NameLabel);
         TopPanel.add(NameText);
         getContentPane().add(TopPanel);
 
+    }
+
+    private void setUpLevel(){
+        LevelPanel = new JPanel();
+        LevelLabel = new JLabel();
+        LevelComboBox = new JComboBox<>();
+        UpdateButton = new JButton();
+
+        LevelLabel.setText("Level:");
+        LevelPanel.add(LevelLabel);
+
+        LevelComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18" }));
+        LevelPanel.add(LevelComboBox);
+
+        UpdateButton.setText("Update");
+        LevelPanel.add(UpdateButton);
+
+        getContentPane().add(LevelPanel);
     }
 
     private void setUpStatsLabel(String stats) throws SQLException {
@@ -273,6 +294,7 @@ public class ChampionUI extends JFrame {
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
         setUpName();
+        setUpLevel();
 
         MiddlePanel.setBackground(new java.awt.Color(204, 204, 255));
         MiddlePanel.setLayout(new java.awt.BorderLayout());

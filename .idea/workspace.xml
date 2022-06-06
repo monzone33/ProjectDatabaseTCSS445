@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95547c82-0ccb-4119-8a40-9968ff5b1207" name="Changes" comment="ChampionUI now updates everything&#10;also clean up a lot of code and formating of UI">
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+    <list default="true" id="95547c82-0ccb-4119-8a40-9968ff5b1207" name="Changes" comment="Clean up typo problems from intelliJ">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/ChampionUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/ChampionUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChampionUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChampionUI.java" afterDir="false" />
@@ -78,17 +77,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Tester" />
@@ -107,7 +95,9 @@
       <updated>1654322508527</updated>
       <workItem from="1654410181351" duration="5399000" />
       <workItem from="1654460210950" duration="4841000" />
-      <workItem from="1654467411344" duration="4902000" />
+      <workItem from="1654467411344" duration="4959000" />
+      <workItem from="1654473350235" duration="275000" />
+      <workItem from="1654484617937" duration="751000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1654322878364</created>
@@ -214,7 +204,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654473189043</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Clean up typo problems from intelliJ">
+      <created>1654473307554</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1654473307554</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,6 +243,7 @@
     <MESSAGE value="ChampionUI now updates name, hp, and hp regen" />
     <MESSAGE value="ChampionUI now updates everything" />
     <MESSAGE value="ChampionUI now updates everything&#10;also clean up a lot of code and formating of UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="ChampionUI now updates everything&#10;also clean up a lot of code and formating of UI" />
+    <MESSAGE value="Clean up typo problems from intelliJ" />
+    <option name="LAST_COMMIT_MESSAGE" value="Clean up typo problems from intelliJ" />
   </component>
 </project>
