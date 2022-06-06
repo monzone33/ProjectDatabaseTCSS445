@@ -9,19 +9,15 @@ import java.util.logging.Logger;
 
 
 public class Tester {
-    public static void main(String[] args) {
-        MainUI UI = new MainUI();
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    UI.createGUI();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+    public static void main(String[] args) throws SQLException {
+        EventQueue.invokeLater(() -> {
+            try {
+                new MainUI().setVisible(true);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         });
-
         /*
         String url = "jdbc:mysql://localhost:3306/project";
 
