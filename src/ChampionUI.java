@@ -72,7 +72,7 @@ public class ChampionUI extends JFrame {
 
     }
 
-    private void setUpLevel(){
+    private void setUpLevel(String championName){
         LevelPanel = new JPanel();
         LevelLabel = new JLabel();
         LevelComboBox = new JComboBox<>();
@@ -89,7 +89,7 @@ public class ChampionUI extends JFrame {
 
         UpdateButton.addActionListener(evt -> {
             try {
-                updateChampionLevel((String) LevelComboBox.getSelectedItem());
+                updateChampionLevel((String) LevelComboBox.getSelectedItem(), championName);
             } catch(SQLException throwable) {
                 throwable.printStackTrace();
             }
@@ -98,216 +98,121 @@ public class ChampionUI extends JFrame {
         getContentPane().add(LevelPanel);
     }
 
-    private void updateChampionLevel(String level) throws SQLException {
+    private void updateChampionLevel(String level, String championName) throws SQLException {
         System.out.println("Update level " + level);
+
+        setUpStatsLabel();
+
         if (level.equals("1")) return;
 
         String query = "SELECT HPPLUS, HPREGENPLUS, MANAPLUS, " +
                 "MANAREGENPLUS, ADPLUS, ASNPLUS, ARMORPLUS, MRPLUS " +
-                "FROM tcss445project.championstats";
+                "FROM tcss445project.championstats WHERE NAME = " +"'"+championName +"'";
 
         Statement st = connection.createStatement();
         ResultSet result = st.executeQuery(query);
 
-        query = "SELECT HP, HPREGEN, MANA, MANAREGEN, " +
+//        while (result.next()) {
+//            NameText.setText(result.getString(1));
+//        }
+
+    }
+
+    private void setUpStatsLabel() throws SQLException {
+        String query = "SELECT HP, HPREGEN, MANA, MANAREGEN, " +
                 "AD, ASN, ARMOR, MR FROM tcss445project.championstats";
 
-        st = connection.createStatement();
-        ResultSet result2 = st.executeQuery(query);
+        Statement st = connection.createStatement();
+        ResultSet result = st.executeQuery(query);
 
         while (result.next()) {
-            NameText.setText(result.getString(1));
+            HpText.setText(String.valueOf(result.getInt(1)));
+            HpRegenText.setText(String.valueOf(result.getDouble(2)));
+            ResourcePanelText.setText(String.valueOf(result.getDouble(3)));
+            ResourceRegenText.setText(String.valueOf(result.getDouble(4)));
+            ADText.setText(String.valueOf(result.getInt(5)));
+            AttackSpeedText.setText(String.valueOf(result.getDouble(6)));
+            ArmorText.setText(String.valueOf(result.getInt(7)));
+            MRText.setText(String.valueOf(result.getDouble(8)));
         }
 
     }
 
-    private void setUpStatsLabel(String stats) throws SQLException {
-        if(stats.equals("HP")) {
-            HpPanel = new JPanel();
-            HpLabel = new JLabel();
-            HpText = new JLabel();
-            HpLabel.setText("Health:");
+    private void setUpAllStats(String championName) throws SQLException {
+        HpPanel = new JPanel();
+        HpLabel = new JLabel();
+        HpText = new JLabel();
+        HpRegenPanel = new JPanel();
+        HpRegenLabel = new JLabel();
+        HpRegenText = new JLabel();
+        ResourcePanel = new JPanel();
+        ResourceLabel = new JLabel();
+        ResourcePanelText = new JLabel();
+        ResourceRegenPanel = new JPanel();
+        ResourceRegenLabel = new JLabel();
+        ResourceRegenText = new JLabel();
+        ADPanel = new JPanel();
+        ADLabel = new JLabel();
+        ADText = new JLabel();
+        AttackSpeedPanel = new JPanel();
+        AttackSpeedLabel = new JLabel();
+        AttackSpeedText = new JLabel();
+        ArmorPanel = new JPanel();
+        ArmorLabel = new JLabel();
+        ArmorText = new JLabel();
+        MRPanel = new JPanel();
+        MRLabel = new JLabel();
+        MRText = new JLabel();
+        MSPanel = new JPanel();
+        MSLabel = new JLabel();
+        MSText = new JLabel();
+        RangePanel = new JPanel();
+        RangeLabel = new JLabel();
+        RangeText = new JLabel();
 
-            String query = "SELECT "+ stats + " FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
-            Statement st = connection.createStatement();
-            ResultSet result = st.executeQuery(query);
+        setUpStatsLabel();
 
-            while (result.next()) {
-                HpText.setText(String.valueOf(result.getInt(1)));
-            }
-            HpPanel.add(HpLabel);
-            HpPanel.add(HpText);
-            StatsPanel.add(HpPanel);
+        String query = "SELECT MS, RANGEN " +
+                "FROM tcss445project.championstats WHERE NAME = " +"'" + championName +"'";
+
+        Statement st = connection.createStatement();
+        ResultSet result = st.executeQuery(query);
+
+        while (result.next()) {
+            MSText.setText(String.valueOf(result.getDouble(1)));
+            RangeText.setText(String.valueOf(result.getInt(2)));
         }
-        if(stats.equals("HPREGEN")) {
-            HpRegenPanel = new JPanel();
-            HpRegenLabel = new JLabel();
-            HpRegenText = new JLabel();
 
-            HpRegenLabel.setText("HpRegen:");
-
-            String query = "SELECT "+ stats + " FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
-            Statement st = connection.createStatement();
-            ResultSet result = st.executeQuery(query);
-
-            while (result.next()) {
-                HpRegenText.setText(String.valueOf(result.getDouble(1)));
-            }
-            HpRegenPanel.add(HpRegenLabel);
-            HpRegenPanel.add(HpRegenText);
-            StatsPanel.add(HpRegenPanel);
-        }
-        if(stats.equals("MANA")) {
-            ResourcePanel = new JPanel();
-            ResourceLabel = new JLabel();
-            ResourcePanelText = new JLabel();
-
-            ResourceLabel.setText("Resource:");
-
-            String query = "SELECT "+ stats + " FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
-            Statement st = connection.createStatement();
-            ResultSet result = st.executeQuery(query);
-
-            while (result.next()) {
-                ResourcePanelText.setText(String.valueOf(result.getDouble(1)));
-            }
-            ResourcePanel.add(ResourceLabel);
-            ResourcePanel.add(ResourcePanelText);
-            StatsPanel.add(ResourcePanel);
-        }
-        if(stats.equals("MANAREGEN")) {
-            ResourceRegenPanel = new JPanel();
-            ResourceRegenLabel = new JLabel();
-            ResourceRegenText = new JLabel();
-
-            ResourceLabel.setText("Resource Regen:");
-
-            String query = "SELECT "+ stats + " FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
-            Statement st = connection.createStatement();
-            ResultSet result = st.executeQuery(query);
-
-            while (result.next()) {
-                ResourceRegenText.setText(String.valueOf(result.getDouble(1)));
-            }
-            ResourceRegenPanel.add(ResourceRegenLabel);
-            ResourceRegenPanel.add(ResourceRegenText);
-            StatsPanel.add(ResourceRegenPanel);
-        }
-        if(stats.equals("AD")) {
-            ADPanel = new JPanel();
-            ADLabel = new JLabel();
-            ADText = new JLabel();
-
-            ADLabel.setText("AD:");
-
-            String query = "SELECT "+ stats + " FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
-            Statement st = connection.createStatement();
-            ResultSet result = st.executeQuery(query);
-
-            while (result.next()) {
-                ADText.setText(String.valueOf(result.getInt(1)));
-            }
-            ADPanel.add(ADLabel);
-            ADPanel.add(ADText);
-            StatsPanel.add(ADPanel);
-        }
-        if(stats.equals("ASN")) {
-            AttackSpeedPanel = new JPanel();
-            AttackSpeedLabel = new JLabel();
-            AttackSpeedText = new JLabel();
-
-            AttackSpeedLabel.setText("Attack Speed:");
-
-            String query = "SELECT "+ stats + " FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
-            Statement st = connection.createStatement();
-            ResultSet result = st.executeQuery(query);
-
-            while (result.next()) {
-                AttackSpeedText.setText(String.valueOf(result.getDouble(1)));
-            }
-            AttackSpeedPanel.add(AttackSpeedLabel);
-            AttackSpeedPanel.add(AttackSpeedText);
-            StatsPanel.add(AttackSpeedPanel);
-        }
-        if(stats.equals("ARMOR")) {
-            ArmorPanel = new JPanel();
-            ArmorLabel = new JLabel();
-            ArmorText = new JLabel();
-
-            ArmorLabel.setText("Armor:");
-
-            String query = "SELECT "+ stats + " FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
-            Statement st = connection.createStatement();
-            ResultSet result = st.executeQuery(query);
-
-            while (result.next()) {
-                ArmorText.setText(String.valueOf(result.getInt(1)));
-            }
-            ArmorPanel.add(AttackSpeedLabel);
-            ArmorPanel.add(ArmorText);
-            StatsPanel.add(ArmorPanel);
-        }
-        if(stats.equals("MR")) {
-            MRPanel = new JPanel();
-            MRLabel = new JLabel();
-            MRText = new JLabel();
-
-            MRLabel.setText("Magic Resist:");
-
-            String query = "SELECT "+ stats + " FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
-            Statement st = connection.createStatement();
-            ResultSet result = st.executeQuery(query);
-
-            while (result.next()) {
-                MRText.setText(String.valueOf(result.getDouble(1)));
-            }
-            MRPanel.add(MRLabel);
-            MRPanel.add(MRText);
-            StatsPanel.add(MRPanel);
-        }
-        if(stats.equals("MS")) {
-            MSPanel = new JPanel();
-            MSLabel = new JLabel();
-            MSText = new JLabel();
-
-            MSLabel.setText("Movement Speed:");
-
-            String query = "SELECT "+ stats + " FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
-            Statement st = connection.createStatement();
-            ResultSet result = st.executeQuery(query);
-
-            while (result.next()) {
-                MSText.setText(String.valueOf(result.getDouble(1)));
-            }
-            MSPanel.add(MSLabel);
-            MSPanel.add(MSText);
-            StatsPanel.add(MSPanel);
-        }
-        if(stats.equals("RANGEN")) {
-            RangePanel = new JPanel();
-            RangeLabel = new JLabel();
-            RangeText = new JLabel();
-
-            RangeLabel.setText("Range:");
-
-            String query = "SELECT "+ stats + " FROM CHAMPIONSTATS WHERE NAME = '" + championName +"'";
-            Statement st = connection.createStatement();
-            ResultSet result = st.executeQuery(query);
-
-            while (result.next()) {
-                RangeText.setText(String.valueOf(result.getInt(1)));
-            }
-            RangePanel.add(RangeLabel);
-            RangePanel.add(RangeText);
-            StatsPanel.add(RangePanel);
-        }
-    }
-
-    private void setUpAllStats() throws SQLException {
-        String[] stats = {"HP", "HPREGEN", "MANA", "MANAREGEN", "AD", "ASN","ARMOR","MR","MS","RANGEN"};
-        for (int i = 0; i < 10; i++) {
-            setUpStatsLabel(stats[i]);
-        }
+        HpPanel.add(HpLabel);
+        HpPanel.add(HpText);
+        StatsPanel.add(HpPanel);
+        HpRegenPanel.add(HpRegenLabel);
+        HpRegenPanel.add(HpRegenText);
+        StatsPanel.add(HpRegenPanel);
+        ResourcePanel.add(ResourceLabel);
+        ResourcePanel.add(ResourcePanelText);
+        StatsPanel.add(ResourcePanel);
+        ResourceRegenPanel.add(ResourceRegenLabel);
+        ResourceRegenPanel.add(ResourceRegenText);
+        StatsPanel.add(ResourceRegenPanel);
+        ADPanel.add(ADLabel);
+        ADPanel.add(ADText);
+        StatsPanel.add(ADPanel);
+        AttackSpeedPanel.add(AttackSpeedLabel);
+        AttackSpeedPanel.add(AttackSpeedText);
+        StatsPanel.add(AttackSpeedPanel);
+        ArmorPanel.add(AttackSpeedLabel);
+        ArmorPanel.add(ArmorText);
+        StatsPanel.add(ArmorPanel);
+        MRPanel.add(MRLabel);
+        MRPanel.add(MRText);
+        StatsPanel.add(MRPanel);
+        MSPanel.add(MSLabel);
+        MSPanel.add(MSText);
+        StatsPanel.add(MSPanel);
+        RangePanel.add(RangeLabel);
+        RangePanel.add(RangeText);
+        StatsPanel.add(RangePanel);
     }
 
     private void initComponents() throws SQLException {
@@ -325,7 +230,7 @@ public class ChampionUI extends JFrame {
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
         setUpName();
-        setUpLevel();
+        setUpLevel(championName);
 
         MiddlePanel.setBackground(new java.awt.Color(204, 204, 255));
         MiddlePanel.setLayout(new java.awt.BorderLayout());
@@ -333,7 +238,7 @@ public class ChampionUI extends JFrame {
         StatsPanel.setBackground(new java.awt.Color(102, 102, 255));
         StatsPanel.setLayout(new java.awt.GridLayout(5, 2, 5, 5));
 
-        setUpAllStats();
+        setUpAllStats(championName);
 
 
         MiddlePanel.add(StatsPanel, java.awt.BorderLayout.CENTER);
