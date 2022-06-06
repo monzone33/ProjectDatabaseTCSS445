@@ -270,7 +270,6 @@ public class ChampionUI extends JFrame {
 
         setUpAllStats(championName);
 
-
         MiddlePanel.add(StatsPanel, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(MiddlePanel);
