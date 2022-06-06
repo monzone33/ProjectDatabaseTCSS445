@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95547c82-0ccb-4119-8a40-9968ff5b1207" name="Changes" comment="Update ChampionUI setupStats, changed to 1 query&#10;and update each text">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="95547c82-0ccb-4119-8a40-9968ff5b1207" name="Changes" comment="test -&gt; ChampionUI stats update base on level&#10;works on hp for now">
+      <change beforePath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/ChampionUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ProjectDatabaseTCSS445/ChampionUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChampionUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChampionUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,7 +96,7 @@
       <workItem from="1654460210950" duration="4841000" />
       <workItem from="1654467411344" duration="4959000" />
       <workItem from="1654473350235" duration="275000" />
-      <workItem from="1654484617937" duration="4218000" />
+      <workItem from="1654484617937" duration="4604000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1654322878364</created>
@@ -245,7 +245,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654488743814</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="test -&gt; ChampionUI stats update base on level&#10;works on hp for now">
+      <created>1654489093226</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1654489093226</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -282,6 +289,7 @@
     <MESSAGE value="UpdateButton now grab level combo box selection" />
     <MESSAGE value="SQL connection for updateButton done" />
     <MESSAGE value="Update ChampionUI setupStats, changed to 1 query&#10;and update each text" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update ChampionUI setupStats, changed to 1 query&#10;and update each text" />
+    <MESSAGE value="test -&gt; ChampionUI stats update base on level&#10;works on hp for now" />
+    <option name="LAST_COMMIT_MESSAGE" value="test -&gt; ChampionUI stats update base on level&#10;works on hp for now" />
   </component>
 </project>

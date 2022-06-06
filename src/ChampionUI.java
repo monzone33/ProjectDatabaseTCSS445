@@ -116,6 +116,10 @@ public class ChampionUI extends JFrame {
             HpText.setText(String.valueOf(Integer.parseInt(HpText.getText()) +
                     (result.getInt(1)) *Integer.parseInt(level)));
 
+            HpRegenText.setText(String.valueOf(Double.parseDouble(HpRegenText.getText()) +
+                    (result.getDouble(2)) *Integer.parseInt(level)));
+
+
 //            HpRegenText.setText(String.valueOf(result.getDouble(2)));
 //            ResourcePanelText.setText(String.valueOf(result.getDouble(3)));
 //            ResourceRegenText.setText(String.valueOf(result.getDouble(4)));
@@ -180,6 +184,16 @@ public class ChampionUI extends JFrame {
         RangeText = new JLabel();
 
         setUpStatsLabel();
+        HpLabel.setText("Health:");
+        HpRegenLabel.setText("Health Regen:");
+        ResourceLabel.setText("Resource:");
+        ResourceRegenLabel.setText("Resource Regen:");
+        ADLabel.setText("AD:");
+        AttackSpeedLabel.setText("Attack Speed:");
+        ArmorLabel.setText("Armor:");
+        MRLabel.setText("Magic resist:");
+        MSLabel.setText("Movement Speed:");
+        RangeLabel.setText("Range:");
 
         String query = "SELECT MS, RANGEN " +
                 "FROM tcss445project.championstats WHERE NAME = " +"'" + championName +"'";
