@@ -2,8 +2,6 @@ import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.*;
 
 
@@ -21,7 +19,7 @@ public class MainUI extends JFrame{
     private JButton itemsButton;
     private JButton runesButton;
     private JPanel SearchPanel;
-    private JLabel SepciesText;
+    private JLabel SpeciesText;
     private JPanel SearchByPanel;
     private JLabel SearchByText;
     private JComboBox<String> SpeciesComboBox;
@@ -41,7 +39,7 @@ public class MainUI extends JFrame{
         RegionText = new JLabel();
         RegionComboBox = new JComboBox<>();
         SpeciesSortPanel = new JPanel();
-        SepciesText = new JLabel();
+        SpeciesText = new JLabel();
         SpeciesComboBox = new JComboBox<>();
         RaceSortPanel = new JPanel();
         RaceText = new JLabel();
@@ -86,9 +84,9 @@ public class MainUI extends JFrame{
 
         SpeciesSortPanel.setPreferredSize(new java.awt.Dimension(180, 40));
 
-        SepciesText.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        SepciesText.setText("Species:");
-        SpeciesSortPanel.add(SepciesText);
+        SpeciesText.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        SpeciesText.setText("Species:");
+        SpeciesSortPanel.add(SpeciesText);
 
         SpeciesComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "All","Ascended", "Celestial", "Demon", "Other", "Sapient", "Spirit", "Undead" }));
         SpeciesSortPanel.add(SpeciesComboBox);
@@ -110,25 +108,21 @@ public class MainUI extends JFrame{
 
         SearchButton.setText("Search");
 
-        SearchButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                try {
-                    SearchButtonActionPerformed(evt);
-                } catch(SQLException throwables) {
-                    throwables.printStackTrace();
-                }
+        SearchButton.addActionListener(evt -> {
+            try {
+                SearchButtonActionPerformed();
+            } catch(SQLException throwables) {
+                throwables.printStackTrace();
             }
         });
 
         itemsButton.setText("Items");
 
-        itemsButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                try {
-                    itemsButton(evt);
-                } catch(SQLException throwables) {
-                    throwables.printStackTrace();
-                }
+        itemsButton.addActionListener(evt -> {
+            try {
+                itemsButton();
+            } catch(SQLException throwables) {
+                throwables.printStackTrace();
             }
         });
         runesButton.setText("Runes");
@@ -174,7 +168,7 @@ public class MainUI extends JFrame{
         pack();
     }
 
-    private void SearchButtonActionPerformed(ActionEvent evt) throws SQLException {
+    private void SearchButtonActionPerformed() throws SQLException {
         System.out.println(RegionComboBox.getSelectedItem());
         System.out.println(SpeciesComboBox.getSelectedItem());
         System.out.println(RaceComboBox.getSelectedItem());
@@ -263,7 +257,7 @@ public class MainUI extends JFrame{
         return new JTable(championRows, columns);
     }
 
-    public void itemsButton(ActionEvent evt) throws SQLException {
+    public void itemsButton() throws SQLException {
         String[] columns = {"NAME", "GRADE", "Cost", "HEALTH", "MANA", "HPHREGEN",
                             "MANARE", "ABILITYHASTE", "ATTACKDAMAGE", "ATTACKSPEED",
                             "CRITICALCHANCE", "LIFESTEAL", "OMNIVAMP", "LETHALITY", "ARMORPENETRATION",
